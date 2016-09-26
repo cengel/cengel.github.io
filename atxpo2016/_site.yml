@@ -1,0 +1,14 @@
+name: "my-website"
+output_dir: "."
+navbar:
+  title: "My Website"
+  left:
+    - text: "Title"
+      href: index.html
+    - text: "Project Summary"
+      href: summary.html
+output:
+  html_document:
+    theme: spacelab
+    fig_width: 6
+    fig_height: 6

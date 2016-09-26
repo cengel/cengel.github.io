@@ -1,0 +1,13 @@
+---
+title: "Smoke and Mirrors in Global Health"
+author: "kohrman & cengel"
+date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
+---
+
+## Visualizing the Hidden Secrets of the Tobacco Industry
+
+_Matthew Kohrman, Associate Professor, Department of Anthropology_
+
+_Claudia Engel, Academic Technology Specialist, Department of Anthropology and Center for Interdisciplinary Digital Research, Stanford Libraries_
+
+2016 ATXpo, Stanford CA, Oct 3rd, 2016
