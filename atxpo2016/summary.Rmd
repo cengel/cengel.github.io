@@ -1,8 +1,9 @@
 ---
 title: "Project Summary"
-author: "kohrman & cengel"
 ---
 
-# Project Summary
+We review our experiences in teaching a Stanford Introductory Seminar that uses the case of the cigarette industry to investigate how a worldwide fount of disease and death comes to be made legible/illegible and how we might reenvision it. 
 
-We review our experiences in teaching an Introductory Seminar that uses the case of the cigarette industry to investigate how a worldwide fount of disease and death comes to be made legible/illegible and how we might reenvision it. Heavy emphasis is placed upon practical learning and data visualization. Reenvisioning the tobacco industry is a hands-on activity. Students create a novel “critical industry visualization” that depicts aspects of cigarette manufacturing, how it is occluded from public scrutiny, or how alternative politics about cigarette manufacturers’ complicity in tobacco-induced death might be generated. Sucessful visualizations are made available online for a public audience.
+Heavy emphasis is placed upon practical learning and data visualization. Reenvisioning the tobacco industry is a hands-on activity. Students create a novel "critical industry visualization" (CIV) that depicts aspects of cigarette manufacturing, how it is occluded from public scrutiny, or how alternative politics about cigarette manufacturers’ complicity in tobacco-induced death might be generated. 
+
+Sucessful visualizations are made available online for a public audience.

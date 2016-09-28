@@ -1,0 +1,70 @@
+---
+title: "Student Responses"
+---
+
+```{r fig.height=6, echo=FALSE}
+library(ggplot2)
+d <- read.csv("~cengel/Anthro/Courses/Anthro182N_Kohrman/2016/EvalsTable.csv")
+d$Response <- factor(d$Response, levels = c("slightly", "moderately", "very", "extremely"))
+
+ggplot(subset(d), aes(x = Response)) + geom_bar(fill="blue")  + facet_grid(Question_short ~ .) + scale_x_discrete(limits=c("not", "slightly", "moderately", "very", "extremely")) + geom_vline(xintercept = 3, color="red", linetype = "longdash") + ylab("") + scale_y_discrete(breaks=NULL) +  theme(strip.text.y = element_text(size = 0.1))
+```
+
+Results are from the post-course survey Winter Quarter 2016 (N = 8).
+
+### Learning Goals
+
+#. To learn some critical analytical tools for thinking in novel ways about large public health problems (ANALYSIS)
+#. To learn new skills that allow scholarly evidence to be communicated in compelling ways to a public audience (COMM)
+#. To gain new appreciation of what kinds of design choices go into making powerful visualizations (DESIGN)
+#. To think in new ways about tobacco as a global health problem (TOBACCO)
+#. To learn new tools in digital visualization (TOOLS)
+
+```{r fig.height=5, echo=FALSE}
+ggplot(subset(d, Category == "Learning Goals"), aes(x = Response)) + geom_bar(fill="blue")  + facet_grid(Question_short ~ .) + scale_x_discrete(limits=c("not", "slightly", "moderately", "very", "extremely")) + geom_vline(xintercept = 3, color="red", linetype = "longdash") + theme(strip.text.y = element_text(angle = 0))
+```
+
+### Course Elements
+#. How useful to you were the in-class breakout groups? (BREAKOUT)
+#. How useful to you were the in-class discussions? (DISCUSSION)
+#. How helpful did you find the examples of past CIVs for your final project? (EXAMPLES)
+#. How useful to you was the final project? (PROJECT)
+#. How useful to you were the readings? (READINGS)
+#. How useful to you were the guest speakers? (SPEAKERS)
+#. How helpful did you find the collection of web tools that Claudia provided for development of your CIV? (RESOURCES)
+#. How much did workshopping allow you to achieve learning goals? (WORKSHOP)
+
+
+```{r fig.height=8, echo=FALSE}
+ggplot(subset(d, Category == "Course Elements"), aes(x = Response)) + geom_bar( fill="blue")  + facet_grid(Question_short ~ .) + scale_x_discrete(limits=c("not", "slightly", "moderately", "very", "extremely")) + geom_vline(xintercept = 3, color="red", linetype = "longdash") + theme(strip.text.y = element_text(angle = 0))
+```
+
+### Course Overall
+#. How would you describe the quality of the instruction in this course? (INSTRUCTION)
+#. How much did you learn from this course? (LEARNING)
+#. How organized was the course? (ORGANIZATION)
+
+
+```{r fig.height=3, echo=FALSE}
+ggplot(subset(d, Category == "Overall"), aes(x = Response)) + geom_bar(fill="blue")  + facet_grid(Question_short ~ .) + scale_x_discrete(limits=c("not", "slightly", "moderately", "very", "extremely")) + geom_vline(xintercept = 3, color="red", linetype = "longdash") + theme(strip.text.y = element_text(angle = 0))
+```
+
+### What skills or knowledge did you learn or improve?
+  
+> "Data **visualization** skills"
+
+> "I improved upon my reading **analysis** and learning to critique other work."
+
+> "I did not know much about **tobacco** at all, and particularly not the industry production side of the issue, so I learned a ton about that."
+
+> "**Multimedia** skills and critical **analysis** skills"
+
+> "My thoughts on tobacco as a global health problem completely changed (I realized that **tobacco companies** completely skew the public's perception of them and make tobacco seem like a solved problem of the past). My **analytical** skills of articles significantly improved."
+
+> "**Analytical** tools to examine anthropology"
+
+> "Critical discussion of major issues, **analyzing** global problems through case studies, breaking down facts and problems to be clearly demonstrated"
+
+> "I learned a lot about cigarettes and **big industry** in general"
+
+> "I improved upon my reading **analysis** and learning to critique other work.""

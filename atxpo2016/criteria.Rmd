@@ -1,0 +1,35 @@
+---
+title: "Evaluation Criteria"
+---
+
+The CIV (Critical Industry Visualization) needs to stand on its own and be understandable for a global audience.
+
+In particular we evaluate:
+
+##### Clarity
+- The title makes it clear what the CIV is about
+- A clear purpose
+- Navigation which is easily understood
+- Clear writing style
+- Clear structure of the CIV, if applicable
+
+##### Conciseness
+- Economy in the details for _text and visualizations_. Every word and every element of the visualization should contribute to the overall purpose of the CIV.
+- Are the materials used (data, texts, resources) relevant for the intended purpose of the CIV?
+
+##### Visualization techniques
+- Applied appropriately for the CIV
+- Support the overall message of the CIV
+- Creativity of concept
+
+##### Effect
+- Is the CIV visually compelling?
+- Does it have an effect on the viewer? (provoke, instruct, surprise.., etc)
+
+##### Quality
+- Use of the best possible quality of images, graphics
+- What is the quality of resources and data used: does the CIV reflect thoughtful research? variety of type of resources? (e.g. journal articles, archival documents, images, sound and other media, etc).
+
+##### Form
+- Correct grammar and language
+- A complete list of credits and links to the sources used

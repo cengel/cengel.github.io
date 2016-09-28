@@ -1,14 +1,24 @@
-name: "my-website"
+name: "atxpo2016"
 output_dir: "."
 navbar:
-  title: "My Website"
+  title: "ATXpo 2016"
   left:
-    - text: "Title"
-      href: index.html
-    - text: "Project Summary"
+    - text: "Summary"
       href: summary.html
+    - text: "Background"
+      href: background.html
+    - text: "Expectations"
+      href: expectations.html
+    - text: "How we help"
+      href: wehelp.html
+    - text: "Evaluation Criteria"
+      href: criteria.html
+    - text: "Student Responses"
+      href: responses.html
+    - text: "Relevance"
+      href: relevance.html
 output:
   html_document:
-    theme: spacelab
-    fig_width: 6
-    fig_height: 6
+    theme: readable
+    fig_width: 4
+    fig_height: 5
