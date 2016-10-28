@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="cengel @ stanford" />
+
+
+<title>Accessing World Bank Data from R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/htmlwidgets-0.7/htmlwidgets.js"></script>
+<link href="site_libs/plotlyjs-1.10.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotlyjs-1.10.1/plotly-latest.min.js"></script>
+<script src="site_libs/plotly-binding-3.6.0/plotly.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="site_libs/highlight/default.css"
+      type="text/css" />
+<script src="site_libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Gear Up 2016</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="DatabaseViz.html">Slides</a>
+</li>
+<li>
+  <a href="worldbank.html">Worldbank</a>
+</li>
+<li>
+  <a href="SULdataAccess.html">SUL data</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Accessing World Bank Data from R</h1>
+<h4 class="author"><em>cengel @ stanford</em></h4>
+<h4 class="date"><em>Last updated: October 28, 2016</em></h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#get-data">1. Get data</a></li>
+<li><a href="#clean-up">2. Clean up</a></li>
+<li><a href="#plot-a-graph">3. Plot a graph</a></li>
+<li><a href="#reproduce-graphs-from-the-paper">4. Reproduce graphs from the paper</a></li>
+<li><a href="#simple-interactivity">5. Simple interactivity</a></li>
+</ul>
+</div>
+
+<div id="background" class="section level3">
+<h3>Background</h3>
+<p><em>From <a href="http://static1.squarespace.com/static/551caca4e4b0a26ceeee87c5/t/57948489d1758ec97e7f783b/1469351050367/Shaefer-international-comparisons.pdf">Shaefer et al 2016</a>:</em></p>
+<blockquote>
+<p>Can Poverty in America Be Compared to Conditions in the World’s Poorest Countries?</p>
+</blockquote>
+<p>World Development Indicators used in this example:</p>
+<ul>
+<li>GDP per capita (constant 2010 US$)</li>
+<li>Life expectancy at birth, total (years)</li>
+<li>Mortality rate, infant (per 1,000 live births)</li>
+</ul>
+<p>There are currently two R packages on CRAN with some differences, we compare them here:</p>
+<ul>
+<li><a href="https://cran.r-project.org/package=WDI"><code>WDI</code></a> (first release Aug 2013)</li>
+<li><a href="https://cran.r-project.org/package=wbstats"><code>webstats</code></a> (first release Apr 2016).</li>
+</ul>
+</div>
+<div id="get-data" class="section level3">
+<h3>1. Get data</h3>
+<p>First we download an updated list of inidicators. Both packages come with a downloaded list. That list appears to be still current for <code>wbstats</code>, as it is a newer package, for <code>WDI</code> however it is not up to date.</p>
+<div id="wbstats" class="section level4">
+<h4>wbstats</h4>
+<pre class="r"><code>library(wbstats)
+new_wb_cache &lt;- wbcache() </code></pre>
+</div>
+<div id="wdi" class="section level4">
+<h4>WDI</h4>
+<pre class="r"><code>library(WDI)
+new_wdi_cache &lt;- WDIcache() </code></pre>
+<p>Next we find out the IDs for the indicators we are intersted in: GDP, life expectancy, and infant mortality.</p>
+<p>Both packages support regular expressions for the search for indicator IDs.</p>
+</div>
+<div id="wbstats-1" class="section level4">
+<h4>wbstats</h4>
+<pre class="r"><code>wbsearch(&quot;gdp.*capita.*US\\$&quot;, cache = new_wb_cache)</code></pre>
+<pre><code>##         indicatorID                          indicator
+## 7728 NY.GDP.PCAP.CD       GDP per capita (current US$)
+## 7730 NY.GDP.PCAP.KD GDP per capita (constant 2010 US$)</code></pre>
+<pre class="r"><code>wbsearch(&quot;life expectancy at birth.*total&quot;, cache = new_wb_cache)</code></pre>
+<pre><code>##          indicatorID                               indicator
+## 14389 SP.DYN.LE00.IN Life expectancy at birth, total (years)</code></pre>
+<pre class="r"><code>wbsearch(&quot;^mortality.*rate.*infant&quot;, cache = new_wb_cache)</code></pre>
+<pre><code>##             indicatorID
+## 14380 SP.DYN.IMRT.FE.IN
+## 14381    SP.DYN.IMRT.IN
+## 14382 SP.DYN.IMRT.MA.IN
+##                                                    indicator
+## 14380 Mortality rate, infant, female (per 1,000 live births)
+## 14381         Mortality rate, infant (per 1,000 live births)
+## 14382   Mortality rate, infant, male (per 1,000 live births)</code></pre>
+</div>
+<div id="wdi-1" class="section level4">
+<h4>WDI</h4>
+<pre class="r"><code>WDIsearch(&quot;gdp.*capita.*US\\$&quot;, cache = new_wdi_cache)</code></pre>
+<pre><code>##      indicator        name                                
+## [1,] &quot;NY.GDP.PCAP.CD&quot; &quot;GDP per capita (current US$)&quot;      
+## [2,] &quot;NY.GDP.PCAP.KD&quot; &quot;GDP per capita (constant 2010 US$)&quot;</code></pre>
+<pre class="r"><code>WDIsearch(&quot;life expectancy at birth.*total&quot;, cache = new_wdi_cache)</code></pre>
+<pre><code>##                                 indicator 
+##                          &quot;SP.DYN.LE00.IN&quot; 
+##                                      name 
+## &quot;Life expectancy at birth, total (years)&quot;</code></pre>
+<pre class="r"><code>WDIsearch(&quot;^mortality.*rate.*infant&quot;, cache = new_wdi_cache)</code></pre>
+<pre><code>##      indicator          
+## [1,] &quot;SP.DYN.IMRT.FE.IN&quot;
+## [2,] &quot;SP.DYN.IMRT.IN&quot;   
+## [3,] &quot;SP.DYN.IMRT.MA.IN&quot;
+##      name                                                    
+## [1,] &quot;Mortality rate, infant, female (per 1,000 live births)&quot;
+## [2,] &quot;Mortality rate, infant (per 1,000 live births)&quot;        
+## [3,] &quot;Mortality rate, infant, male (per 1,000 live births)&quot;</code></pre>
+<p>Finally we download the data. The download functions provided in the two packages mainly differ in their arguments and in the format of the data they return.</p>
+<p>The <a href="https://www.rdocumentation.org/packages/WDI/versions/2.4/topics/WDI"><code>WDI()</code>function</a> takes the argument <code>extra=..</code> which can be set to <code>TRUE</code> to download more data fields (e.g. region, iso3c code, income_level).<br />
+The the <a href="https://www.rdocumentation.org/packages/wbstats/versions/0.1/topics/wb"><code>wb()</code> function</a> does not have these particular options. In order to get this additional information (for exampe, to link countries to regions) it is necessary to download a separate table. Note, though that <a href="https://www.rdocumentation.org/packages/wbstats/versions/0.1/topics/wb"><code>wb()</code></a> comes with other options (e.g. download of quarterly or monthly data, most recent values) that <a href="https://www.rdocumentation.org/packages/WDI/versions/2.4/topics/WDI"><code>WDI()</code></a> does not have.</p>
+</div>
+<div id="wbstats-2" class="section level4">
+<h4>wbstats</h4>
+<pre class="r"><code>wb_dat &lt;- wb(indicator = c(&quot;NY.GDP.PCAP.KD&quot;, &quot;SP.DYN.LE00.IN&quot;, &quot;SP.DYN.IMRT.IN&quot;)) 
+names(wb_dat)</code></pre>
+<pre><code>## [1] &quot;value&quot;       &quot;date&quot;        &quot;indicatorID&quot; &quot;indicator&quot;   &quot;iso2c&quot;      
+## [6] &quot;country&quot;</code></pre>
+</div>
+<div id="wdi-2" class="section level4">
+<h4>WDI</h4>
+<pre class="r"><code>wdi_dat &lt;- WDI(indicator = c(&quot;NY.GDP.PCAP.KD&quot;, &quot;SP.DYN.LE00.IN&quot;, &quot;SP.DYN.IMRT.IN&quot;), start = 1960, end = 2015, extra = TRUE) 
+names(wdi_dat)</code></pre>
+<pre><code>##  [1] &quot;iso2c&quot;          &quot;country&quot;        &quot;year&quot;           &quot;NY.GDP.PCAP.KD&quot;
+##  [5] &quot;SP.DYN.LE00.IN&quot; &quot;SP.DYN.IMRT.IN&quot; &quot;iso3c&quot;          &quot;region&quot;        
+##  [9] &quot;capital&quot;        &quot;longitude&quot;      &quot;latitude&quot;       &quot;income&quot;        
+## [13] &quot;lending&quot;</code></pre>
+<p><a href="https://www.rdocumentation.org/packages/WDI/versions/2.4/topics/WDI"><code>WDI()</code></a> returns a data frame in <strong>wide format</strong>. Rows are per year and country/region, columns are the different indicators.<br />
+<a href="https://www.rdocumentation.org/packages/wbstats/versions/0.1/topics/wb"><code>wb()</code></a> returns a data frame in <strong>long format</strong>. Each row is one observation.</p>
+</div>
+</div>
+<div id="clean-up" class="section level3">
+<h3>2. Clean up</h3>
+<p>We remove all entries that are aggregated regional values.</p>
+<p>Using the <code>wbstats</code> package we need to add two extra steps to download a separate table with the regions names and join it to our data table before eliminating the undesired rows.</p>
+<div id="wbstats-3" class="section level4">
+<h4>wbstats</h4>
+<pre class="r"><code>wb_countries &lt;- wbcountries() 
+names(wb_countries)</code></pre>
+<pre><code>##  [1] &quot;iso3c&quot;     &quot;iso2c&quot;     &quot;country&quot;   &quot;capital&quot;   &quot;long&quot;     
+##  [6] &quot;lat&quot;       &quot;regionID&quot;  &quot;region&quot;    &quot;adminID&quot;   &quot;admin&quot;    
+## [11] &quot;incomeID&quot;  &quot;income&quot;    &quot;lendingID&quot; &quot;lending&quot;</code></pre>
+<pre class="r"><code>wb_dat &lt;- merge(wb_dat, y = wb_countries[c(&quot;iso2c&quot;, &quot;region&quot;)], by = &quot;iso2c&quot;, all.x = TRUE)
+
+wb_dat &lt;- subset(wb_dat, region != &quot;Aggregates&quot;) # this also removes NAs</code></pre>
+</div>
+<div id="wdi-3" class="section level4">
+<h4>WDI</h4>
+<pre class="r"><code>wdi_dat &lt;- subset(wdi_dat, region != &quot;Aggregates&quot;) # this also removes NAs</code></pre>
+<p>Now we rename the indicators to something we understand better.</p>
+<p>With <code>wbstats</code> we need to add an extra step to reformat the table into wide format that we will use as input for the plotting.</p>
+</div>
+<div id="wbstats-4" class="section level4">
+<h4>wbstats</h4>
+<pre class="r"><code>wb_dat$indicatorID[wb_dat$indicatorID == &quot;NY.GDP.PCAP.KD&quot;] &lt;- &quot;GDP&quot;
+wb_dat$indicatorID[wb_dat$indicatorID == &quot;SP.DYN.LE00.IN&quot;] &lt;- &quot;life_expectancy&quot;
+wb_dat$indicatorID[wb_dat$indicatorID == &quot;SP.DYN.IMRT.IN&quot;] &lt;- &quot;infant_mortality&quot;
+
+library(reshape2)
+wb_dat &lt;- dcast(wb_dat, iso2c + country + date + region ~ indicatorID,  value.var = &#39;value&#39;)</code></pre>
+</div>
+<div id="wdi-4" class="section level4">
+<h4>WDI</h4>
+<pre class="r"><code>names(wdi_dat)[which(names(wdi_dat) == &quot;NY.GDP.PCAP.KD&quot;)] &lt;- &quot;GDP&quot;
+names(wdi_dat)[which(names(wdi_dat) == &quot;SP.DYN.LE00.IN&quot;)] &lt;- &quot;life_expectancy&quot;
+names(wdi_dat)[which(names(wdi_dat) == &quot;SP.DYN.IMRT.IN&quot;)] &lt;- &quot;infant_mortality&quot;</code></pre>
+<p>Now we have pretty much identical tables.</p>
+</div>
+</div>
+<div id="plot-a-graph" class="section level3">
+<h3>3. Plot a graph</h3>
+<div id="wbstats-5" class="section level4">
+<h4>wbstats</h4>
+<pre class="r"><code>library(ggplot2)
+ggplot(subset(wb_dat, date == &quot;2008&quot;), aes(x = GDP, y = infant_mortality)) + geom_point()</code></pre>
+<p><img src="worldbank_files/figure-html/unnamed-chunk-11-1.png" width="384" /></p>
+</div>
+<div id="wdi-5" class="section level4">
+<h4>WDI</h4>
+<pre class="r"><code>ggplot(subset(wdi_dat, year == 2008), aes(x = GDP, y = infant_mortality)) + geom_point()</code></pre>
+<p><img src="worldbank_files/figure-html/unnamed-chunk-12-1.png" width="384" /></p>
+</div>
+</div>
+<div id="reproduce-graphs-from-the-paper" class="section level3">
+<h3>4. Reproduce graphs from the paper</h3>
+<div id="life-expectancy" class="section level4">
+<h4>Life Expectancy</h4>
+<pre class="r"><code>lifexp_countries &lt;- subset(wb_dat, country %in% c(&quot;United States&quot;, &quot;Rwanda&quot;, &quot;Mongolia&quot;, &quot;Pakistan&quot;, &quot;Lao PDR&quot;, &quot;Bhutan&quot;, &quot;Malaysia&quot;, &quot;Brazil&quot;, &quot;Ireland&quot;, &quot;Japan&quot;, &quot;Sweden&quot;, &quot;Netherlands&quot;))
+
+ggplot(subset(lifexp_countries, date == &quot;2008&quot;), aes(x = GDP, y = life_expectancy, color = country == &quot;United States&quot;)) + 
+  geom_point() +  
+  geom_text(aes(label = country), size=3, nudge_y = 0.4) +
+  scale_x_continuous(limits = c(0, 70000))</code></pre>
+<p><img src="worldbank_files/figure-html/unnamed-chunk-13-1.png" width="384" /></p>
+<div class="figure">
+<img src="img/LifeExpectancy.png" alt="(From Shaefer et al 2016)" />
+<p class="caption">(<em>From Shaefer et al 2016</em>)</p>
+</div>
+</div>
+<div id="infant-mortality" class="section level4">
+<h4>Infant Mortality</h4>
+<pre class="r"><code>infmort_countries &lt;- subset(wb_dat, country %in% c(&quot;United States&quot;, &quot;Tonga&quot;, &quot;Colombia&quot;, &quot;Grenada&quot;, &quot;Sri Lanka&quot;, &quot;Malta&quot;, &quot;Germany&quot;, &quot;Japan&quot;, &quot;Sweden&quot;, &quot;Netherlands&quot;))
+
+ggplot(subset(infmort_countries, date == &quot;2008&quot;), aes(x = GDP, y = infant_mortality, color = country == &quot;United States&quot;)) + 
+  geom_point() +  
+  geom_text(aes(label = country), size=3, nudge_y = 0.2) +
+  scale_x_continuous(limits = c(0, 70000))</code></pre>
+<p><img src="worldbank_files/figure-html/unnamed-chunk-14-1.png" width="384" /></p>
+<div class="figure">
+<img src="img/InfantMortality.png" alt="(From Shaefer et al 2016)" />
+<p class="caption">(<em>From Shaefer et al 2016</em>)</p>
+</div>
+</div>
+</div>
+<div id="simple-interactivity" class="section level3">
+<h3>5. Simple interactivity</h3>
+<pre class="r"><code>library(plotly)
+
+g &lt;- ggplot(subset(infmort_countries, date &gt; &quot;1999&quot; &amp; date &lt;= &quot;2015&quot;), aes(x = GDP, y = infant_mortality, color = country == &quot;United States&quot;, tooltip = country)) + 
+  geom_point() + 
+  facet_wrap(~ date) + 
+  theme(legend.position=&quot;none&quot;)
+
+ggplotly(g)</code></pre>
+<div id="htmlwidget-4d2b2aac2829be4fe2b2" style="width:384px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4d2b2aac2829be4fe2b2">{"x":{"data":[{"x":[4764.16762905498,38000.6877025003,6359.7201308291,40153.5346365135,1837.13739163448,18236.3742867161,46135.9230719291,44693.8864545132,3310.50237791158],"y":[21.2,4.4,13.6,3.3,14,6.8,5.1,3.4,15.1],"text":["GDP: 4764.17<br>infant_mortality: 21.2<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 38000.69<br>infant_mortality: 4.4<br>country == \"United States\": FALSE<br>country: Germany","GDP: 6359.72<br>infant_mortality: 13.6<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 40153.53<br>infant_mortality: 3.3<br>country == \"United States\": FALSE<br>country: Japan","GDP: 1837.14<br>infant_mortality: 14<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 18236.37<br>infant_mortality: 6.8<br>country == \"United States\": FALSE<br>country: Malta","GDP: 46135.92<br>infant_mortality: 5.1<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 44693.89<br>infant_mortality: 3.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3310.5<br>infant_mortality: 15.1<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[45055.817918284],"y":[7.1],"text":"GDP: 45055.82<br>infant_mortality: 7.1<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[4774.97560873689,38580.0225108268,6216.99579348076,40199.2870683514,1795.08213471828,17420.8673180037,46761.660729567,45270.932862606,3411.06380820455],"y":[20.6,4.3,13.3,3.1,13.6,6.6,5,3.4,14.8],"text":["GDP: 4774.98<br>infant_mortality: 20.6<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 38580.02<br>infant_mortality: 4.3<br>country == \"United States\": FALSE<br>country: Germany","GDP: 6217<br>infant_mortality: 13.3<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 40199.29<br>infant_mortality: 3.1<br>country == \"United States\": FALSE<br>country: Japan","GDP: 1795.08<br>infant_mortality: 13.6<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 17420.87<br>infant_mortality: 6.6<br>country == \"United States\": FALSE<br>country: Malta","GDP: 46761.66<br>infant_mortality: 5<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 45270.93<br>infant_mortality: 3.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3411.06<br>infant_mortality: 14.8<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text"},{"x":[45047.4871976844],"y":[7],"text":"GDP: 45047.49<br>infant_mortality: 7<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x2","yaxis":"y","hoverinfo":"text"},{"x":[4825.83176644778,38515.2130641358,6414.88500073995,40222.0474633582,1852.25862270878,17777.6415958624,46512.2862704562,46059.5212216961,3507.24449830168],"y":[20,4.2,13.1,3,13.2,6.4,4.9,3.3,14.6],"text":["GDP: 4825.83<br>infant_mortality: 20<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 38515.21<br>infant_mortality: 4.2<br>country == \"United States\": FALSE<br>country: Germany","GDP: 6414.89<br>infant_mortality: 13.1<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 40222.05<br>infant_mortality: 3<br>country == \"United States\": FALSE<br>country: Japan","GDP: 1852.26<br>infant_mortality: 13.2<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 17777.64<br>infant_mortality: 6.4<br>country == \"United States\": FALSE<br>country: Malta","GDP: 46512.29<br>infant_mortality: 4.9<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 46059.52<br>infant_mortality: 3.3<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3507.24<br>infant_mortality: 14.6<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text"},{"x":[45428.6456781274],"y":[6.9],"text":"GDP: 45428.65<br>infant_mortality: 6.9<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x3","yaxis":"y","hoverinfo":"text"},{"x":[4945.95843950914,38220.6251301825,7003.39916684745,40812.4096162795,1947.48037810627,17684.4240930935,46424.7887740823,46983.2347981761,3561.26132375426],"y":[19.4,4.1,12.9,2.9,13,6.2,4.7,3.2,14.4],"text":["GDP: 4945.96<br>infant_mortality: 19.4<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 38220.63<br>infant_mortality: 4.1<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7003.4<br>infant_mortality: 12.9<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 40812.41<br>infant_mortality: 2.9<br>country == \"United States\": FALSE<br>country: Japan","GDP: 1947.48<br>infant_mortality: 13<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 17684.42<br>infant_mortality: 6.2<br>country == \"United States\": FALSE<br>country: Malta","GDP: 46424.79<br>infant_mortality: 4.7<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 46983.23<br>infant_mortality: 3.2<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3561.26<br>infant_mortality: 14.4<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x4","yaxis":"y","hoverinfo":"text"},{"x":[46304.0360895612],"y":[6.8],"text":"GDP: 46304.04<br>infant_mortality: 6.8<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x4","yaxis":"y","hoverinfo":"text"},{"x":[5139.97734770032,38676.1907201262,6938.6706566076,41761.820121993,2038.14209180814,17477.6517687123,47203.2349619227,48820.7697828916,3566.27773045779],"y":[18.9,4,12.6,2.9,15.3,6.1,4.6,3.1,14.3],"text":["GDP: 5139.98<br>infant_mortality: 18.9<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 38676.19<br>infant_mortality: 4<br>country == \"United States\": FALSE<br>country: Germany","GDP: 6938.67<br>infant_mortality: 12.6<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 41761.82<br>infant_mortality: 2.9<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2038.14<br>infant_mortality: 15.3<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 17477.65<br>infant_mortality: 6.1<br>country == \"United States\": FALSE<br>country: Malta","GDP: 47203.23<br>infant_mortality: 4.6<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 48820.77<br>infant_mortality: 3.1<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3566.28<br>infant_mortality: 14.3<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text"},{"x":[47614.2798621765],"y":[6.9],"text":"GDP: 47614.28<br>infant_mortality: 6.9<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text"},{"x":[5312.08210618283,38971.641894822,7837.19984065605,42301.8898853585,2149.03908278846,18003.187552238,48110.449770113,49996.3428525087,3599.82571093797],"y":[18.4,3.9,12.4,2.7,12.1,6,4.5,3,14.3],"text":["GDP: 5312.08<br>infant_mortality: 18.4<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 38971.64<br>infant_mortality: 3.9<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7837.2<br>infant_mortality: 12.4<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 42301.89<br>infant_mortality: 2.7<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2149.04<br>infant_mortality: 12.1<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 18003.19<br>infant_mortality: 6<br>country == \"United States\": FALSE<br>country: Malta","GDP: 48110.45<br>infant_mortality: 4.5<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 49996.34<br>infant_mortality: 3<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3599.83<br>infant_mortality: 14.3<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text"},{"x":[48755.6160606735],"y":[6.8],"text":"GDP: 48755.62<br>infant_mortality: 6.8<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text"},{"x":[5596.73193242238,40459.2661435109,7499.88645517455,42990.7669479509,2296.40879822224,18336.6326157816,49723.35516359,52046.656019901,3538.32317807001],"y":[17.8,3.8,12.3,2.7,11.4,5.9,4.3,2.8,14.4],"text":["GDP: 5596.73<br>infant_mortality: 17.8<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 40459.27<br>infant_mortality: 3.8<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7499.89<br>infant_mortality: 12.3<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 42990.77<br>infant_mortality: 2.7<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2296.41<br>infant_mortality: 11.4<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 18336.63<br>infant_mortality: 5.9<br>country == \"United States\": FALSE<br>country: Malta","GDP: 49723.36<br>infant_mortality: 4.3<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 52046.66<br>infant_mortality: 2.8<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3538.32<br>infant_mortality: 14.4<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x3","yaxis":"y2","hoverinfo":"text"},{"x":[49575.401013591],"y":[6.7],"text":"GDP: 49575.4<br>infant_mortality: 6.7<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x3","yaxis":"y2","hoverinfo":"text"},{"x":[5910.2823908501,41834.3577183285,7935.96479283175,43882.7504767207,2434.03692307162,19054.7284174676,51450.3227074513,53421.1993582227,3354.70398993808],"y":[17.3,3.7,12.1,2.6,10.7,5.9,4.2,2.7,14.5],"text":["GDP: 5910.28<br>infant_mortality: 17.3<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 41834.36<br>infant_mortality: 3.7<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7935.96<br>infant_mortality: 12.1<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 43882.75<br>infant_mortality: 2.6<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2434.04<br>infant_mortality: 10.7<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 19054.73<br>infant_mortality: 5.9<br>country == \"United States\": FALSE<br>country: Malta","GDP: 51450.32<br>infant_mortality: 4.2<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 53421.2<br>infant_mortality: 2.7<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3354.7<br>infant_mortality: 14.5<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x4","yaxis":"y2","hoverinfo":"text"},{"x":[49979.5338429195],"y":[6.6],"text":"GDP: 49979.53<br>infant_mortality: 6.6<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x4","yaxis":"y2","hoverinfo":"text"},{"x":[6048.07890639156,42367.6198736368,7984.53422034996,43404.6279824291,2559.47430859484,19669.46511653,52121.1956176542,52711.3750056458,3415.47487139948],"y":[16.9,3.6,12,2.5,10.2,5.8,4,2.6,14.6],"text":["GDP: 6048.08<br>infant_mortality: 16.9<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 42367.62<br>infant_mortality: 3.6<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7984.53<br>infant_mortality: 12<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 43404.63<br>infant_mortality: 2.5<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2559.47<br>infant_mortality: 10.2<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 19669.47<br>infant_mortality: 5.8<br>country == \"United States\": FALSE<br>country: Malta","GDP: 52121.2<br>infant_mortality: 4<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 52711.38<br>infant_mortality: 2.6<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3415.47<br>infant_mortality: 14.6<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"FALSE","legendgroup":"FALSE","showlegend":false,"xaxis":"x","yaxis":"y3","hoverinfo":"text"},{"x":[49364.6445500336],"y":[6.5],"text":"GDP: 49364.64<br>infant_mortality: 6.5<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":" TRUE","legendgroup":" TRUE","showlegend":false,"xaxis":"x","yaxis":"y3","hoverinfo":"text"},{"x":[6078.30274083291,40088.4914484135,7430.42140694455,41010.78822549,2630.1436159026,18975.1247052845,49900.1960021781,49554.5095831301,3432.99671576562],"y":[16.4,3.6,12,2.4,9.7,5.7,3.8,2.5,14.8],"text":["GDP: 6078.3<br>infant_mortality: 16.4<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 40088.49<br>infant_mortality: 3.6<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7430.42<br>infant_mortality: 12<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 41010.79<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2630.14<br>infant_mortality: 9.7<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 18975.12<br>infant_mortality: 5.7<br>country == \"United States\": FALSE<br>country: Malta","GDP: 49900.2<br>infant_mortality: 3.8<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 49554.51<br>infant_mortality: 2.5<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3433<br>infant_mortality: 14.8<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(10,FALSE)","legendgroup":"(10,FALSE)","showlegend":true,"xaxis":"x2","yaxis":"y3","hoverinfo":"text"},{"x":[47575.608562749],"y":[6.4],"text":"GDP: 47575.61<br>infant_mortality: 6.4<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(10, TRUE)","legendgroup":"(10, TRUE)","showlegend":true,"xaxis":"x2","yaxis":"y3","hoverinfo":"text"},{"x":[6250.65449979147,41788.0447853084,7365.6666592364,42935.2527196828,2819.65130924227,19694.0831567142,50341.251919716,52076.4305245885,3557.73718366504],"y":[15.9,3.5,11.9,2.4,9.4,5.6,3.7,2.5,15],"text":["GDP: 6250.65<br>infant_mortality: 15.9<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 41788.04<br>infant_mortality: 3.5<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7365.67<br>infant_mortality: 11.9<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 42935.25<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Japan","GDP: 2819.65<br>infant_mortality: 9.4<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 19694.08<br>infant_mortality: 5.6<br>country == \"United States\": FALSE<br>country: Malta","GDP: 50341.25<br>infant_mortality: 3.7<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 52076.43<br>infant_mortality: 2.5<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3557.74<br>infant_mortality: 15<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(11,FALSE)","legendgroup":"(11,FALSE)","showlegend":true,"xaxis":"x3","yaxis":"y3","hoverinfo":"text"},{"x":[48374.0867933094],"y":[6.3],"text":"GDP: 48374.09<br>infant_mortality: 6.3<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(11, TRUE)","legendgroup":"(11, TRUE)","showlegend":true,"xaxis":"x3","yaxis":"y3","hoverinfo":"text"},{"x":[6592.43073615253,43306.5024457091,7394.24016171736,42824.7122978692,3033.71462076092,19885.3670986453,50940.5857116201,53061.7464872864,3614.10027289175],"y":[15.4,3.4,11.8,2.3,9.1,5.6,3.6,2.4,15],"text":["GDP: 6592.43<br>infant_mortality: 15.4<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 43306.5<br>infant_mortality: 3.4<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7394.24<br>infant_mortality: 11.8<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 42824.71<br>infant_mortality: 2.3<br>country == \"United States\": FALSE<br>country: Japan","GDP: 3033.71<br>infant_mortality: 9.1<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 19885.37<br>infant_mortality: 5.6<br>country == \"United States\": FALSE<br>country: Malta","GDP: 50940.59<br>infant_mortality: 3.6<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 53061.75<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3614.1<br>infant_mortality: 15<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(12,FALSE)","legendgroup":"(12,FALSE)","showlegend":true,"xaxis":"x4","yaxis":"y3","hoverinfo":"text"},{"x":[48774.7830879542],"y":[6.1],"text":"GDP: 48774.78<br>infant_mortality: 6.1<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(12, TRUE)","legendgroup":"(12, TRUE)","showlegend":true,"xaxis":"x4","yaxis":"y3","hoverinfo":"text"},{"x":[6789.59168622107,44223.65407233,7280.68164823012,43658.1733764975,3286.16861143409,19951.3560532705,50215.9537467881,52519.8565348027,3620.79177303575],"y":[14.9,3.3,11.5,2.2,8.9,5.5,3.5,2.4,15],"text":["GDP: 6789.59<br>infant_mortality: 14.9<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 44223.65<br>infant_mortality: 3.3<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7280.68<br>infant_mortality: 11.5<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 43658.17<br>infant_mortality: 2.2<br>country == \"United States\": FALSE<br>country: Japan","GDP: 3286.17<br>infant_mortality: 8.9<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 19951.36<br>infant_mortality: 5.5<br>country == \"United States\": FALSE<br>country: Malta","GDP: 50215.95<br>infant_mortality: 3.5<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 52519.86<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3620.79<br>infant_mortality: 15<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(13,FALSE)","legendgroup":"(13,FALSE)","showlegend":true,"xaxis":"x","yaxis":"y4","hoverinfo":"text"},{"x":[49481.1586539983],"y":[6.1],"text":"GDP: 49481.16<br>infant_mortality: 6.1<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(13, TRUE)","legendgroup":"(13, TRUE)","showlegend":true,"xaxis":"x","yaxis":"y4","hoverinfo":"text"},{"x":[7051.13231369165,43433.5543425469,7421.96909186598,44327.9382090483,3372.16561566748,20339.908069156,49820.098263954,52723.089076326,3511.51477935392],"y":[14.5,3.3,11.4,2.1,8.7,5.3,3.3,2.4,14.9],"text":["GDP: 7051.13<br>infant_mortality: 14.5<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 43433.55<br>infant_mortality: 3.3<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7421.97<br>infant_mortality: 11.4<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 44327.94<br>infant_mortality: 2.1<br>country == \"United States\": FALSE<br>country: Japan","GDP: 3372.17<br>infant_mortality: 8.7<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: 20339.91<br>infant_mortality: 5.3<br>country == \"United States\": FALSE<br>country: Malta","GDP: 49820.1<br>infant_mortality: 3.3<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 52723.09<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3511.51<br>infant_mortality: 14.9<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(14,FALSE)","legendgroup":"(14,FALSE)","showlegend":true,"xaxis":"x2","yaxis":"y4","hoverinfo":"text"},{"x":[49849.2429797363],"y":[5.9],"text":"GDP: 49849.24<br>infant_mortality: 5.9<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(14, TRUE)","legendgroup":"(14, TRUE)","showlegend":true,"xaxis":"x2","yaxis":"y4","hoverinfo":"text"},{"x":[7291.21927375183,44755.1789355194,7810.92570363746,44386.0973303469,3503.98833101856,null,50143.0894607736,53385.9673909306,3571.61531748322],"y":[14.1,3.2,11.1,2.1,8.6,5.2,3.3,2.4,14.7],"text":["GDP: 7291.22<br>infant_mortality: 14.1<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 44755.18<br>infant_mortality: 3.2<br>country == \"United States\": FALSE<br>country: Germany","GDP: 7810.93<br>infant_mortality: 11.1<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 44386.1<br>infant_mortality: 2.1<br>country == \"United States\": FALSE<br>country: Japan","GDP: 3503.99<br>infant_mortality: 8.6<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: NA<br>infant_mortality: 5.2<br>country == \"United States\": FALSE<br>country: Malta","GDP: 50143.09<br>infant_mortality: 3.3<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 53385.97<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: 3571.62<br>infant_mortality: 14.7<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(15,FALSE)","legendgroup":"(15,FALSE)","showlegend":true,"xaxis":"x3","yaxis":"y4","hoverinfo":"text"},{"x":[50662.4130557572],"y":[5.7],"text":"GDP: 50662.41<br>infant_mortality: 5.7<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(15, TRUE)","legendgroup":"(15, TRUE)","showlegend":true,"xaxis":"x3","yaxis":"y4","hoverinfo":"text"},{"x":[7447.77914687292,45269.789138901,8041.36348654702,44656.8319059556,3637.53913009246,null,50925.2938315217,54988.6166915624,null],"y":[13.6,3.1,10.8,2,8.4,5.1,3.2,2.4,14.4],"text":["GDP: 7447.78<br>infant_mortality: 13.6<br>country == \"United States\": FALSE<br>country: Colombia","GDP: 45269.79<br>infant_mortality: 3.1<br>country == \"United States\": FALSE<br>country: Germany","GDP: 8041.36<br>infant_mortality: 10.8<br>country == \"United States\": FALSE<br>country: Grenada","GDP: 44656.83<br>infant_mortality: 2<br>country == \"United States\": FALSE<br>country: Japan","GDP: 3637.54<br>infant_mortality: 8.4<br>country == \"United States\": FALSE<br>country: Sri Lanka","GDP: NA<br>infant_mortality: 5.1<br>country == \"United States\": FALSE<br>country: Malta","GDP: 50925.29<br>infant_mortality: 3.2<br>country == \"United States\": FALSE<br>country: Netherlands","GDP: 54988.62<br>infant_mortality: 2.4<br>country == \"United States\": FALSE<br>country: Sweden","GDP: NA<br>infant_mortality: 14.4<br>country == \"United States\": FALSE<br>country: Tonga"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"name":"(16,FALSE)","legendgroup":"(16,FALSE)","showlegend":true,"xaxis":"x4","yaxis":"y4","hoverinfo":"text"},{"x":[51486.0121703515],"y":[5.6],"text":"GDP: 51486.01<br>infant_mortality: 5.6<br>country == \"United States\": TRUE<br>country: United States","key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"name":"(16, TRUE)","legendgroup":"(16, TRUE)","showlegend":true,"xaxis":"x4","yaxis":"y4","hoverinfo":"text"}],"layout":{"margin":{"b":35.7990867579909,"l":37.2602739726027,"t":33.5342465753425,"r":7.30593607305936},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"type":"linear","autorange":false,"tickmode":"array","range":[-864.594593123926,57648.2934194046],"ticktext":["0","20000","40000"],"tickvals":[0,20000,40000],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,0.230974124809741],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y4","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"annotations":[{"text":"GDP","x":0.5,"y":-0.082572298325723,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"middle","annotationType":"axis"},{"text":"infant_mortality","x":-0.103215372907154,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"center","yanchor":"middle","annotationType":"axis"},{"text":"2000","x":0.115487062404871,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2001","x":0.375,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2002","x":0.625,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2003","x":0.884512937595129,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2004","x":0.115487062404871,"y":0.710426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2005","x":0.375,"y":0.710426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2006","x":0.625,"y":0.710426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2007","x":0.884512937595129,"y":0.710426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2008","x":0.115487062404871,"y":0.460426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2009","x":0.375,"y":0.460426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2010","x":0.625,"y":0.460426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2011","x":0.884512937595129,"y":0.460426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2012","x":0.115487062404871,"y":0.210426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2013","x":0.375,"y":0.210426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2014","x":0.625,"y":0.210426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"},{"text":"2015","x":0.884512937595129,"y":0.210426179604262,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"yaxis":{"type":"linear","autorange":false,"tickmode":"array","range":[1.04,22.16],"ticktext":["5","10","15","20"],"tickvals":[5,10,15,20],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.789573820395738,1],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0.789573820395738,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":1,"y1":1.06929133858268},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0.789573820395738,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":1,"y1":1.06929133858268},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0.789573820395738,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":1,"y1":1.06929133858268},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0.789573820395738,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":1,"y1":1.06929133858268},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0.539573820395738,"y1":0.710426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0.710426179604262,"y1":0.779717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0.539573820395738,"y1":0.710426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0.710426179604262,"y1":0.779717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0.539573820395738,"y1":0.710426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0.710426179604262,"y1":0.779717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0.539573820395738,"y1":0.710426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0.710426179604262,"y1":0.779717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0.289573820395738,"y1":0.460426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0.460426179604262,"y1":0.529717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0.289573820395738,"y1":0.460426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0.460426179604262,"y1":0.529717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0.289573820395738,"y1":0.460426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0.460426179604262,"y1":0.529717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0.289573820395738,"y1":0.460426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0.460426179604262,"y1":0.529717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0,"y1":0.210426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":0.230974124809741,"y0":0.210426179604262,"y1":0.279717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0,"y1":0.210426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.269025875190259,"x1":0.480974124809741,"y0":0.210426179604262,"y1":0.279717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0,"y1":0.210426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.519025875190259,"x1":0.730974124809741,"y0":0.210426179604262,"y1":0.279717518186939},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0,"y1":0.210426179604262},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"transparent","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0.769025875190259,"x1":1,"y0":0.210426179604262,"y1":0.279717518186939}],"xaxis2":{"type":"linear","autorange":false,"tickmode":"array","range":[-864.594593123926,57648.2934194046],"ticktext":["0","20000","40000"],"tickvals":[0,20000,40000],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.269025875190259,0.480974124809741],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y4","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"xaxis3":{"type":"linear","autorange":false,"tickmode":"array","range":[-864.594593123926,57648.2934194046],"ticktext":["0","20000","40000"],"tickvals":[0,20000,40000],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.519025875190259,0.730974124809741],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y4","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"xaxis4":{"type":"linear","autorange":false,"tickmode":"array","range":[-864.594593123926,57648.2934194046],"ticktext":["0","20000","40000"],"tickvals":[0,20000,40000],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.769025875190259,1],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y4","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis2":{"type":"linear","autorange":false,"tickmode":"array","range":[1.04,22.16],"ticktext":["5","10","15","20"],"tickvals":[5,10,15,20],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.539573820395738,0.710426179604262],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis3":{"type":"linear","autorange":false,"tickmode":"array","range":[1.04,22.16],"ticktext":["5","10","15","20"],"tickvals":[5,10,15,20],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0.289573820395738,0.460426179604262],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis4":{"type":"linear","autorange":false,"tickmode":"array","range":[1.04,22.16],"ticktext":["5","10","15","20"],"tickvals":[5,10,15,20],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,0.210426179604262],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToRemove":["sendDataToCloud"]},"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="reference" class="section level4">
+<h4>Reference:</h4>
+<p>H. Luke Shaefer, Pinghui Wu, Kathryn Edin, 2016: Can Poverty in America Be Compared to Conditions in the World’s Poorest Countries? Publication, Stanford Center on Poverty &amp; Inequality. <a href="http://inequality.stanford.edu/publications/media/details/can-poverty-america-be-compared-conditions-worlds-poorest-countries" class="uri">http://inequality.stanford.edu/publications/media/details/can-poverty-america-be-compared-conditions-worlds-poorest-countries</a></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

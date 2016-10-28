@@ -1,0 +1,15 @@
+---
+title: "Gear Up for Social Science Data 2016"
+---
+
+On Friday, Oct. 21st, Green Library welcomed data provider representatives from nine different sources at the [Gear Up for Social Science Data Extravaganza](http://library.stanford.edu/projects/gear-research/fall-2016). The event featured data talks, consultations, demos and open labs.
+
+Here are the materials for my presentation.
+
+> - [Slides: Data Visualization](DatabaseViz.html)
+> - [Worldbank Example](worldbank.html) (download .Rmd here)
+> - [Accessing Databases from R](SULdataAccess.html) (download handout here)
+
+_Claudia Engel, Academic Technology Specialist, Department of Anthropology and Center for Interdisciplinary Digital Research, Stanford Libraries_
+
+Gear Up for Social Science Data 2016 Extravanganza, Stanford CA, Oct 21st, 2016

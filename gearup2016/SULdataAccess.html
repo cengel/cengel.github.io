@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Online at: bit.ly/suldbR" />
+
+
+<title>Accessing SUL Provided Social Science Data with R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="site_libs/highlight/default.css"
+      type="text/css" />
+<script src="site_libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Gear Up 2016</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="DatabaseViz.html">Slides</a>
+</li>
+<li>
+  <a href="worldbank.html">Worldbank</a>
+</li>
+<li>
+  <a href="SULdataAccess.html">SUL data</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Accessing SUL Provided Social Science Data with R</h1>
+<h4 class="author"><em>Online at: bit.ly/suldbR</em></h4>
+<h4 class="date"><em>Last updated: October 28, 2016 – cengel @ stanford</em></h4>
+
+</div>
+
+
+<p>The Stanford Libraries offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress.</p>
+<p>Data providers marked with <strong>(*)</strong> are presenters at the <em><a href="https://library.stanford.edu/projects/gear-research">Social Science Gear Up 2016 event</a></em>.</p>
+<div id="data-from-sul" class="section level2">
+<h2>Data from SUL</h2>
+<ul>
+<li><a href="http://www.bloomberg.com">Bloomberg</a> <strong>(*)</strong>
+<ul>
+<li>Restricted to designated machines at GSB</li>
+<li>Details here: <a href="http://libguides.stanford.edu/bloomberg" class="uri">http://libguides.stanford.edu/bloomberg</a></li>
+</ul></li>
+<li><a href="http://www.bea.gov">Bureau of Economic Analysis</a>
+<ul>
+<li><a href="http://www.bea.gov/API/docs/index.htm">has API</a></li>
+<li>R package <a href="https://blog.bea.gov/2016/09/28/guest-blog-white-house-open-data-innovation-summit/">announced for late Oct 2016</a></li>
+</ul></li>
+<li><a href="http://openjustice.doj.ca.gov/index.html">California Attorney General’s Open Justice Portal</a>
+<ul>
+<li>Use <code>read.csv(url(&quot;http:...&quot;))</code> to load <em>CSV</em> from <a href="http://openjustice.doj.ca.gov/data">their data portal</a>.</li>
+</ul></li>
+<li><a href="http://www.census.gov">Census public/RDC</a> <strong>(*)</strong>
+<ul>
+<li>Public census <a href="http://www.census.gov/data/developers/data-sets.html">has APIs</a></li>
+<li>RDC restricted to designated, offline machines</li>
+<li>R packages:
+<ul>
+<li><a href="https://cran.r-project.org/package=acs">acs</a></li>
+<li><a href="https://cran.r-project.org/package=UScensus2010">UScensus2010</a></li>
+<li><a href="https://cran.r-project.org/package=tigris">tigris</a></li>
+</ul></li>
+<li>References:
+<ul>
+<li><a href="http://spatialdemography.org/wp-content/uploads/2013/04/9.-Sparks.pd">Getting data from the ACS into R</a></li>
+<li><a href="http://spatialdemography.org/wp-content/uploads/2013/10/6.-Sparks.pdf">Performing spatial regression modeling in R with ACS data</a></li>
+</ul></li>
+</ul></li>
+<li><a href="http://www.corelogic.com">CoreLogic</a> <strong>(*)</strong>
+<ul>
+<li>Stanford only, download <em>XLS</em> <a href="https://purl.stanford.edu/pv311by5369">from Stanford Digital Repository</a></li>
+<li><strong>need to read End User License Agreement before use</strong></li>
+</ul></li>
+<li><a href="http://data-planet.com">DataPlanet</a> <strong>(*)</strong>
+<ul>
+<li>Stanford only via <a href="http://statisticaldatasets.data-planet.com.ezproxy.stanford.edu/dataplanet/Datasets.html">EzProxy</a> and export <em>CSV</em></li>
+<li>Supposedly <a href="http://homepage.data-planet.com/content-syndication">has API(?)</a>, but <a href="http://homepage.data-planet.com/request-form">request form is not accessible</a></li>
+</ul></li>
+<li><a href="http://www.gallup.com/">Gallup Analytics</a> <strong>(*)</strong>
+<ul>
+<li>Stanford only, via <a href="https://analyticscampus-gallup-com.ezproxy.stanford.edu/">EzProxy</a></li>
+<li>Data download through web interface as <em>XLSX</em> only – <strong>broken or disabled(?)</strong></li>
+</ul></li>
+<li><a href="http://icpsr.umich.edu/">ICPSR</a> <strong>(*)</strong>
+<ul>
+<li>R package <a href="https://cran.r-project.org/package=icpsrdata"><code>icpsrdata</code></a> <a href="https://github.com/fsolt/icpsrdata">(GitHub)</a></li>
+</ul></li>
+<li><a href="http://data.imf.org/">IMF</a> <strong>(*)</strong>
+<ul>
+<li><a href="http://datahelp.imf.org/knowledgebase/articles/630877-api">Has API</a></li>
+<li>R packages:
+<ul>
+<li><a href="https://cran.r-project.org/package=IMFData"><code>IMFData</code></a> <a href="https://github.com/mingjerli/IMFData">(GitHub)</a></li>
+<li><a href="https://github.com/mingjerli/rWEO"><code>rWEO</code></a> for IMF-WEO data</li>
+</ul></li>
+</ul></li>
+<li><a href="http://maplight.org/data">MapLight</a> <strong>(*)</strong>
+<ul>
+<li><a href="http://maplight.org/apis/bill-positions">Bill Positions</a> has <a href="http://maplight.org/services_open_api">API</a></li>
+<li><a href="https://github.com/hadley/maplight-data">Some R code from Hadley Wickham</a> (not a package!). Last commit several years back, but still seems to work.</li>
+<li>Download <a href="http://maplight.org/data/get/california-money-and-politics-dataset">California Money and Politics Bulk Data Set</a> and <a href="http://maplight.org/data/get/federal-money-and-politics-dataset">Federal Money and Politics Data Set</a> as zipped <em>CSV</em>, like <a href="http://stackoverflow.com/a/3053883/2630957">this</a>.</li>
+</ul></li>
+<li><a href="https://www.oecd.org/">OECD</a>
+<ul>
+<li>R package <a href="https://cran.r-project.org/package=OECD"><code>OECD</code></a> <a href="https://github.com/expersso/OECD">(GitHub)</a></li>
+</ul></li>
+<li><a href="http://statistical.proquest.com">ProQuest Statistical Products</a>
+<ul>
+<li>Stanford only, via <a href="http://statistical.proquest.com.ezproxy.stanford.edu/">EzProxy</a></li>
+<li>Data download as <em>XLS</em> (or <em>PDF</em>)</li>
+</ul></li>
+<li><a href="http://www.referenceusa.com">RefUSA</a>
+<ul>
+<li>Stanford only, via <a href="http://www.referenceusa.com.gsbproxy.stanford.edu">GSB</a></li>
+<li>Data download as <em>CSV</em>, <em>TSV</em>, <em>Excel</em> (275 downloads per search)</li>
+</ul></li>
+<li><a href="http://ropercenter.cornell.edu/ipoll-database/">Roper iPoll</a>
+<ul>
+<li>Stanford only, via <a href="https://ropercenter-cornell-edu.ezproxy.stanford.edu/CFIDE/cf/action/ipoll/index.cfm">EzProxy</a></li>
+<li>Data download seems tedious. I was only able to download <em>CSV</em> for a single question at a time.</li>
+</ul></li>
+<li><a href="https://data.smcgov.org">San Mateo County Open Data</a>
+<ul>
+<li>Use generic <a href="https://dev.socrata.com/connectors/rsocrata.html">Socrata Open Data API</a></li>
+<li>R package <a href="https://cran.r-project.org/package=RSocrata"><code>RSocrata</code></a> <a href="https://github.com/Chicago/RSocrata">(GitHub)</a></li>
+</ul></li>
+<li><a href="http://geographicresearch.com/simplymap/">SimplyMap</a>
+<ul>
+<li>Stanford extended access via <a href="http://simplymap.com/" class="uri">http://simplymap.com/</a> – need to be either on campus, or use VPN or set up browser proxy. 5 concurrent licenses.</li>
+<li>Manual data download, no remote access (guest account allows to download <em>CSV</em>, Stanford access allows to download <em>SHP</em> as well)</li>
+</ul></li>
+<li><a href="http://data.worldbank.org">World Bank</a> <strong>(*)</strong>
+<ul>
+<li>Currently <a href="http://databank.worldbank.org/data/databases.aspx">60 databases</a></li>
+<li><a href="https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information">Has API</a></li>
+<li>R packages:
+<ul>
+<li><a href="https://cran.r-project.org/package=WDI"><code>WDI</code></a> <a href="https://github.com/vincentarelbundock/WDI">(GitHub)</a></li>
+<li><a href="https://cran.r-project.org/package=wbstats"><code>wbstats</code></a></li>
+<li><a href="https://github.com/mingjerli/rWBData"><code>rWBData</code></a></li>
+<li><a href="https://github.com/ropensci/rWBclimate"><code>rWBclimate</code></a> for the World Bank climate data</li>
+</ul></li>
+</ul></li>
+<li><a href="https://wrds-web.wharton.upenn.edu/wrds/">Wharton Research Data Services</a> (WRDS) <strong>(*)</strong>
+<ul>
+<li>Stanford login via <a href="http://wrds-web.wharton.upenn.edu.gsbproxy.stanford.edu/wrds/connect/">GSB</a></li>
+<li>Data access via remote connection to SAS/SHARE server, which allows direct query of WRDS data via standard database queries, using their (remote) R version.</li>
+<li>Documentation:
+<ul>
+<li><a href="https://research-it.wharton.upenn.edu/news/working-with-wrds-data-directly-from-python-r-and-matlab/">WRDS Data Directly from Python, R, and MATLAB</a></li>
+<li><a href="https://wrds-web-wharton-upenn-edu.gsbproxy.stanford.edu/wrds/support/Accessing%20and%20Manipulating%20the%20Data/_007R%20Programming/_001Using%20R%20with%20WRDS.cfm">Using R with WRDS</a></li>
+</ul></li>
+<li>Sparsely documented R package <a href="https://github.com/wthielen/wrds"><code>wrds</code></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="other-r-packages" class="section level2">
+<h2>Other R packages</h2>
+<ul>
+<li>US Bureau of Labor Statistics (BLS): <a href="https://cran.r-project.org/package=rUnemploymentData"><code>rUnemploymentData</code></a></li>
+<li><a href="https://www.datacite.org/">DataCite</a>: <a href="https://cran.r-project.org/package=rdatacite"><code>rdatacite</code></a></li>
+<li>Medicare public files: <a href="https://CRAN.R-project.org/package=medicare"><code>medicare</code></a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

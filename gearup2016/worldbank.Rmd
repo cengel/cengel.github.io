@@ -1,0 +1,182 @@
+---
+title: "Accessing World Bank Data from R"
+author: "cengel @ stanford"
+date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    fig_height: 3
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+### Background
+
+_From [Shaefer et al 2016](http://static1.squarespace.com/static/551caca4e4b0a26ceeee87c5/t/57948489d1758ec97e7f783b/1469351050367/Shaefer-international-comparisons.pdf):_
+
+> Can Poverty in America Be Compared to Conditions in the World’s Poorest Countries?
+
+
+World Development Indicators used in this example: 
+
+- GDP per capita (constant 2010 US$)
+- Life expectancy at birth, total (years)
+- Mortality rate, infant (per 1,000 live births)
+
+There are currently two R packages on CRAN with some differences, we compare them here:
+
+- [`WDI`](https://cran.r-project.org/package=WDI) (first release Aug 2013)
+- [`webstats`](https://cran.r-project.org/package=wbstats) (first release Apr 2016).
+
+### 1. Get data
+
+First we download an updated list of inidicators. Both packages come with a downloaded list. That list appears to be still current for `wbstats`, as it is a newer package, for `WDI` however it is not up to date. 
+
+#### wbstats
+```{r}
+library(wbstats)
+new_wb_cache <- wbcache() 
+```
+#### WDI
+```{r}
+library(WDI)
+new_wdi_cache <- WDIcache() 
+```
+
+Next we find out the IDs for the indicators we are intersted in: GDP, life expectancy, and infant mortality.
+
+Both packages support regular expressions for the search for indicator IDs.
+
+#### wbstats
+```{r}
+wbsearch("gdp.*capita.*US\\$", cache = new_wb_cache)
+wbsearch("life expectancy at birth.*total", cache = new_wb_cache)
+wbsearch("^mortality.*rate.*infant", cache = new_wb_cache)
+```
+#### WDI
+```{r}
+WDIsearch("gdp.*capita.*US\\$", cache = new_wdi_cache)
+WDIsearch("life expectancy at birth.*total", cache = new_wdi_cache)
+WDIsearch("^mortality.*rate.*infant", cache = new_wdi_cache)
+```
+
+Finally we download the data. The download functions provided in the two packages mainly differ in their arguments and in the format of the data they return.
+
+The [`WDI()`function](https://www.rdocumentation.org/packages/WDI/versions/2.4/topics/WDI) takes the argument `extra=..` which can be set to `TRUE` to download more data fields (e.g. region, iso3c code, income_level).  
+The the [`wb()` function](https://www.rdocumentation.org/packages/wbstats/versions/0.1/topics/wb) does not have these particular options. In order to get this additional information (for exampe, to link countries to regions) it is necessary to download a separate table. Note, though that [`wb()`](https://www.rdocumentation.org/packages/wbstats/versions/0.1/topics/wb) comes with other options (e.g. download of quarterly or monthly data, most recent values) that  [`WDI()`](https://www.rdocumentation.org/packages/WDI/versions/2.4/topics/WDI) does not have.
+
+#### wbstats
+```{r}
+wb_dat <- wb(indicator = c("NY.GDP.PCAP.KD", "SP.DYN.LE00.IN", "SP.DYN.IMRT.IN")) 
+names(wb_dat)
+```
+#### WDI
+```{r}
+
+wdi_dat <- WDI(indicator = c("NY.GDP.PCAP.KD", "SP.DYN.LE00.IN", "SP.DYN.IMRT.IN"), start = 1960, end = 2015, extra = TRUE) 
+names(wdi_dat)
+```
+
+
+[`WDI()`](https://www.rdocumentation.org/packages/WDI/versions/2.4/topics/WDI) returns a data frame in **wide format**. Rows are per year and country/region, columns are the different indicators.  
+ [`wb()`](https://www.rdocumentation.org/packages/wbstats/versions/0.1/topics/wb) returns a data frame in **long format**. Each row is one observation.
+
+
+### 2. Clean up
+
+We remove all entries that are aggregated regional values.
+
+Using the `wbstats` package we need to add two extra steps to download a separate table with the regions names and join it to our data table before eliminating the undesired rows.
+
+#### wbstats
+```{r}
+wb_countries <- wbcountries() 
+names(wb_countries)
+wb_dat <- merge(wb_dat, y = wb_countries[c("iso2c", "region")], by = "iso2c", all.x = TRUE)
+
+wb_dat <- subset(wb_dat, region != "Aggregates") # this also removes NAs
+```
+#### WDI
+```{r}
+wdi_dat <- subset(wdi_dat, region != "Aggregates") # this also removes NAs
+```
+
+
+Now we rename the indicators to something we understand better.
+
+With `wbstats` we need to add an extra step to reformat the table into wide format that we will use as input for the plotting.  
+
+#### wbstats
+```{r}
+wb_dat$indicatorID[wb_dat$indicatorID == "NY.GDP.PCAP.KD"] <- "GDP"
+wb_dat$indicatorID[wb_dat$indicatorID == "SP.DYN.LE00.IN"] <- "life_expectancy"
+wb_dat$indicatorID[wb_dat$indicatorID == "SP.DYN.IMRT.IN"] <- "infant_mortality"
+
+library(reshape2)
+wb_dat <- dcast(wb_dat, iso2c + country + date + region ~ indicatorID,  value.var = 'value')
+```
+#### WDI
+```{r}
+names(wdi_dat)[which(names(wdi_dat) == "NY.GDP.PCAP.KD")] <- "GDP"
+names(wdi_dat)[which(names(wdi_dat) == "SP.DYN.LE00.IN")] <- "life_expectancy"
+names(wdi_dat)[which(names(wdi_dat) == "SP.DYN.IMRT.IN")] <- "infant_mortality"
+```
+Now we have pretty much identical tables.
+
+### 3. Plot a graph
+
+#### wbstats
+```{r}
+library(ggplot2)
+ggplot(subset(wb_dat, date == "2008"), aes(x = GDP, y = infant_mortality)) + geom_point()
+```
+
+#### WDI
+```{r}
+ggplot(subset(wdi_dat, year == 2008), aes(x = GDP, y = infant_mortality)) + geom_point()
+```
+
+### 4. Reproduce graphs from the paper 
+
+#### Life Expectancy
+```{r}
+lifexp_countries <- subset(wb_dat, country %in% c("United States", "Rwanda", "Mongolia", "Pakistan", "Lao PDR", "Bhutan", "Malaysia", "Brazil", "Ireland", "Japan", "Sweden", "Netherlands"))
+
+ggplot(subset(lifexp_countries, date == "2008"), aes(x = GDP, y = life_expectancy, color = country == "United States")) + 
+  geom_point() +  
+  geom_text(aes(label = country), size=3, nudge_y = 0.4) +
+  scale_x_continuous(limits = c(0, 70000))
+```
+
+![(_From Shaefer et al 2016_)](img/LifeExpectancy.png)
+ 
+
+#### Infant Mortality
+```{r}
+infmort_countries <- subset(wb_dat, country %in% c("United States", "Tonga", "Colombia", "Grenada", "Sri Lanka", "Malta", "Germany", "Japan", "Sweden", "Netherlands"))
+
+ggplot(subset(infmort_countries, date == "2008"), aes(x = GDP, y = infant_mortality, color = country == "United States")) + 
+  geom_point() +  
+  geom_text(aes(label = country), size=3, nudge_y = 0.2) +
+  scale_x_continuous(limits = c(0, 70000))
+```
+
+![(_From Shaefer et al 2016_)](img/InfantMortality.png)
+
+### 5. Simple interactivity
+```{r fig.height=5}
+library(plotly)
+
+g <- ggplot(subset(infmort_countries, date > "1999" & date <= "2015"), aes(x = GDP, y = infant_mortality, color = country == "United States", tooltip = country)) + 
+  geom_point() + 
+  facet_wrap(~ date) + 
+  theme(legend.position="none")
+
+ggplotly(g)
+```
+
+#### Reference:
+H. Luke Shaefer, Pinghui Wu, Kathryn Edin, 2016: Can Poverty in America Be Compared to Conditions in the World’s Poorest Countries? Publication, Stanford Center on Poverty & Inequality.  http://inequality.stanford.edu/publications/media/details/can-poverty-america-be-compared-conditions-worlds-poorest-countries
+
