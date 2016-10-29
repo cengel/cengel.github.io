@@ -1,6 +1,6 @@
 ---
 title: "Accessing SUL Provided Social Science Data with R"
-author: 'Online at: bit.ly/suldbR'
+author: 'Online at: bit.ly/sul-db-R'
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` --  cengel @ stanford"
 output:
   html_document:
