@@ -5,10 +5,11 @@ navbar:
   left:
     - text: "Slides"
       href: DatabaseViz.html
-    - text: "Worldbank"
-      href: worldbank.html
     - text: "SUL data"
       href: SULdataAccess.html
+    - text: "Worldbank"
+      href: worldbank.html
+
 output:
   html_document:
     theme: readable
