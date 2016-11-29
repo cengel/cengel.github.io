@@ -105,7 +105,9 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
     - Sparsely documented R package [`wrds`](https://github.com/wthielen/wrds) 
 
 ## Other R packages
-- US Bureau of Labor Statistics (BLS):  [`rUnemploymentData`](https://cran.r-project.org/package=rUnemploymentData)
+- US Bureau of Labor Statistics (BLS):
+    - [`rUnemploymentData`](https://cran.r-project.org/package=rUnemploymentData)
+    - [`blscrapeR`](https://CRAN.R-project.org/package=blscrapeR)
 - [DataCite](https://www.datacite.org/):  [`rdatacite`](https://cran.r-project.org/package=rdatacite) 
-- Medicare public files:
-[`medicare`](https://CRAN.R-project.org/package=medicare)
+- Medicare public files: [`medicare`](https://CRAN.R-project.org/package=medicare)
+- Social Media for Network Analysis: [`SocialMediaLab`]( https://CRAN.R-project.org/package=SocialMediaLab)
