@@ -2,15 +2,14 @@
 title: "Accessing SUL Provided Social Science Data with R"
 author: 'Online at: bit.ly/sul-db-R'
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` --  cengel @ stanford"
-output:
-  html_document:
-    fig_height: 6
-    fig_width: 6
-    mathjax: default
-    theme: spacelab
+html_document:
+  fig_height: 6
+  fig_width: 6
+  mathjax: default
+  theme: spacelab
 ---
 
-The Stanford Libraries offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress.
+The Stanford Libraries offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
 
 Data providers marked with __(\*)__ are presenters at the _[Social Science Gear Up 2016 event](https://library.stanford.edu/projects/gear-research)_.
 
