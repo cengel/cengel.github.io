@@ -2,11 +2,7 @@
 title: "Accessing SUL Provided Social Science Data with R"
 author: 'Online at: bit.ly/sul-db-R'
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` --  cengel @ stanford"
-html_document:
-  fig_height: 6
-  fig_width: 6
-  mathjax: default
-  theme: spacelab
+output: pdf_document
 ---
 
 The Stanford Libraries offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
@@ -30,11 +26,11 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
     - Public census [has APIs](http://www.census.gov/data/developers/data-sets.html) 
     - RDC restricted to designated, offline machines
     - R packages: 
-        - [acs](https://cran.r-project.org/package=acs)
+        - [acs](https://cran.r-project.org/package=acs) (some instructions [here](http://eglenn.scripts.mit.edu/citystate/wp-content/uploads/2013/06/wpid-working_with_acs_R3.pdf))
         - [UScensus2010](https://cran.r-project.org/package=UScensus2010)
         - [tigris](https://cran.r-project.org/package=tigris)
-    - References: 
-        - [Getting data from the ACS into R](http://spatialdemography.org/wp-content/uploads/2013/04/9.-Sparks.pd)
+    - References, slighty outdated: 
+        - [Getting data from the ACS into R](http://spatialdemography.org/wp-content/uploads/2013/04/9.-Sparks.pdf)
         - [Performing spatial regression modeling in R with ACS data](http://spatialdemography.org/wp-content/uploads/2013/10/6.-Sparks.pdf)
 
 - [CoreLogic](http://www.corelogic.com) __(\*)__  
