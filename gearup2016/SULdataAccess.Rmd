@@ -106,3 +106,6 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
 - [DataCite](https://www.datacite.org/):  [`rdatacite`](https://cran.r-project.org/package=rdatacite) 
 - Medicare public files: [`medicare`](https://CRAN.R-project.org/package=medicare)
 - Social Media for Network Analysis: [`SocialMediaLab`]( https://CRAN.R-project.org/package=SocialMediaLab)
+- United States Treasury 
+    - [`Rtreasuryio`](https://github.com/csvsoundsystem/Rtreasuryio): a single, simple function for submitting SQL queries to [`treasury.io`](http://treasury.io)
+
