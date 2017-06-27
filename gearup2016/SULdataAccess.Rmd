@@ -29,6 +29,7 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
         - [acs](https://cran.r-project.org/package=acs) (some instructions [here](http://eglenn.scripts.mit.edu/citystate/wp-content/uploads/2013/06/wpid-working_with_acs_R3.pdf))
         - [UScensus2010](https://cran.r-project.org/package=UScensus2010)
         - [tigris](https://cran.r-project.org/package=tigris)
+        - [tidycensus](https://CRAN.R-project.org/package=tidycensus): Load US Census Boundary and Attribute Data as `tidyverse` and `sf`-Ready Data Frames
     - References, slighty outdated: 
         - [Getting data from the ACS into R](http://spatialdemography.org/wp-content/uploads/2013/04/9.-Sparks.pdf)
         - [Performing spatial regression modeling in R with ACS data](http://spatialdemography.org/wp-content/uploads/2013/10/6.-Sparks.pdf)
@@ -108,4 +109,5 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
 - Social Media for Network Analysis: [`SocialMediaLab`]( https://CRAN.R-project.org/package=SocialMediaLab)
 - United States Treasury 
     - [`Rtreasuryio`](https://github.com/csvsoundsystem/Rtreasuryio): a single, simple function for submitting SQL queries to [`treasury.io`](http://treasury.io)
+- [`enigma`](https://CRAN.R-project.org/package=enigma): a client to interact with the [Enigma](https://public.enigma.com) API, including getting the data and metadata for datasets as well as collecting statistics on datasets. (Note that there is another site: [Enigma Public](https://public.enigma.com) "the world’s broadest collection of public data" which provides API access as well, not sure how the two are related with regard to this package.)  
 
