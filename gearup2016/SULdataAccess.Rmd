@@ -111,8 +111,18 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
 - Social Media for Network Analysis: [`SocialMediaLab`]( https://CRAN.R-project.org/package=SocialMediaLab)
 - United States Treasury 
     - [`Rtreasuryio`](https://github.com/csvsoundsystem/Rtreasuryio): a single, simple function for submitting SQL queries to [`treasury.io`](http://treasury.io)
-- [`enigma`](https://CRAN.R-project.org/package=enigma): a client to interact with the [Enigma](https://public.enigma.com) API, including getting the data and metadata for datasets as well as collecting statistics on datasets. (Note that there is another site: [Enigma Public](https://public.enigma.com) "the world’s broadest collection of public data" which provides API access as well, not sure how the two are related with regard to this package.)  
-- [pdfetch](https://CRAN.R-project.org/package=pdfetch): Economic and financial time series from public sources, including the St Louis Fed's FRED system, Yahoo Finance, the US Bureau of Labor Statistics, the US Energy Information Administration, the World Bank, Eurostat, the European Central Bank, the Bank of England, the UK's Office of National Statistics, Deutsche Bundesbank, and INSEE.
-- [eechidna](https://CRAN.R-project.org/package=eechidna): 2013 and 2016 Australian Federal Election (House of Representatives) and the 2011 Australian Census
-    
+- [`enigma`](https://CRAN.R-project.org/package=enigma): a client to interact with the [Enigma](https://public.enigma.com) API, including getting the data and metadata for datasets as well as collecting statistics on datasets. (Note that there is another site: [Enigma Public](https://public.enigma.com) "the world’s broadest collection of public data" which provides API access as well, not sure how the two are related with regard to this package.)
+- [`pdfetch`](https://CRAN.R-project.org/package=pdfetch): Economic and financial time series from public sources, including the St Louis Fed's FRED system, Yahoo Finance, the US Bureau of Labor Statistics, the US Energy Information Administration, the World Bank, Eurostat, the European Central Bank, the Bank of England, the UK's Office of National Statistics, Deutsche Bundesbank, and INSEE.
+- [`eechidna`](https://CRAN.R-project.org/package=eechidna): 2013 and 2016 Australian Federal Election (House of Representatives) and the 2011 Australian Census
+- [`rtimes`](https://CRAN.R-project.org/package=rtimes): Interface to Congress, Campaign Finance, Article Search, and Geographic APIs from the [New York Times](http://developer.nytimes.com/) and [ProPublica](https://www.propublica.org/datastore/apis). Covers only a subset of the APIs.
+- [`crminer`](https://CRAN.R-project.org/package=crminer) and [`rcrossref`](https://CRAN.R-project.org/package=rcrossref): Text mining client for [Crossref](<https://crossref.org>). Includes functions for getting getting links to full text of articles, fetching full text articles from those links or Digital Object Identifiers (DOIs), and text extraction from PDFs. `rcrossref` is for metadata.
+- [`rdpla`](https://CRAN.R-project.org/package=rdpla): Client for the [Digital Public Library of America (DPLA)](https://dp.la), using its [REST API](https://dp.la/info/developers/codex/)
+- [`internetarchive`](https://CRAN.R-project.org/package=internetarchive): Search the [Internet Archive](https://archive.org/), retrieve metadata, and download files.
+- [`patentsview`](https://CRAN.R-project.org/package=patentsview): An R Client for [PatentsView](http://www.patentsview.org) with functions to simplify the [PatentsView API](http://www.patentsview.org/api/doc.html) query language and parse the data that comes back.
+- [`pleiades`](https://CRAN.R-project.org/package=pleiades): Interface to the [Pleiades Archeological Database](https://pleiades.stoa.org/)
+- [`USAboundaries`](https://CRAN.R-project.org/package=USAboundaries): Historical boundaries of the United States. Map the United States (or the colonies that became the United States) on any date from 1629 to 2000. Contains both county and state/territory level polygons.
+- [`rdatacite`](https://CRAN.R-project.org/package=rdatacite) Client for the web service methods provided by [DataCite](https://www.datacite.org/)
+- [`roadoi`](https://CRAN.R-project.org/package=roadoi): Find Free Versions of Scholarly Publications via the [oaDOI Service](https://oadoi.org)
+
+(A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 
