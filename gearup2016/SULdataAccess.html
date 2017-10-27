@@ -12,7 +12,7 @@
 <meta name="author" content="Online at: bit.ly/sul-db-R" />
 
 
-<title>Accessing SUL Provided Social Science Data with R</title>
+<title>Accessing SL Provided Social Science Data with R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -197,19 +197,18 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Accessing SUL Provided Social Science Data with R</h1>
+<h1 class="title toc-ignore">Accessing SL Provided Social Science Data with R</h1>
 <h4 class="author"><em>Online at: bit.ly/sul-db-R</em></h4>
-<h4 class="date"><em>Last updated: August 14, 2017 – cengel @ stanford</em></h4>
+<h4 class="date"><em>Last updated: October 27, 2017 – cengel @ stanford</em></h4>
 
 </div>
 
 
-<p>The Stanford Libraries offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. (<a href="https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf">Download as pdf.</a>)</p>
-<p>Data providers marked with <strong>(*)</strong> are presenters at the <em><a href="https://library.stanford.edu/projects/gear-research">Social Science Gear Up 2016 event</a></em>.</p>
-<div id="data-from-sul" class="section level2">
-<h2>Data from SUL</h2>
+<p>The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. (<a href="https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf">Download as pdf.</a>)</p>
+<div id="data-from-sl" class="section level2">
+<h2>Data from SL</h2>
 <ul>
-<li><a href="http://www.bloomberg.com">Bloomberg</a> <strong>(*)</strong>
+<li><a href="http://www.bloomberg.com">Bloomberg</a>
 <ul>
 <li>Restricted to designated machines at GSB</li>
 <li>Details here: <a href="http://libguides.stanford.edu/bloomberg" class="uri">http://libguides.stanford.edu/bloomberg</a></li>
@@ -223,7 +222,7 @@ $(document).ready(function () {
 <ul>
 <li>Use <code>read.csv(url(&quot;http:...&quot;))</code> to load <em>CSV</em> from <a href="http://openjustice.doj.ca.gov/data">their data portal</a>.</li>
 </ul></li>
-<li><a href="http://www.census.gov">Census public/RDC</a> <strong>(*)</strong>
+<li><a href="http://www.census.gov">Census public/RDC</a>
 <ul>
 <li>Public census <a href="http://www.census.gov/data/developers/data-sets.html">has APIs</a></li>
 <li>RDC restricted to designated, offline machines</li>
@@ -242,26 +241,26 @@ $(document).ready(function () {
 <li><a href="http://spatialdemography.org/wp-content/uploads/2013/10/6.-Sparks.pdf">Performing spatial regression modeling in R with ACS data</a></li>
 </ul></li>
 </ul></li>
-<li><a href="http://www.corelogic.com">CoreLogic</a> <strong>(*)</strong>
+<li><a href="http://www.corelogic.com">CoreLogic</a>
 <ul>
 <li>Stanford only, download <em>XLS</em> <a href="https://purl.stanford.edu/pv311by5369">from Stanford Digital Repository</a></li>
 <li><strong>need to read End User License Agreement before use</strong></li>
 </ul></li>
-<li><a href="http://data-planet.com">DataPlanet</a> <strong>(*)</strong>
+<li><a href="http://data-planet.com">DataPlanet</a>
 <ul>
 <li>Stanford only via <a href="http://statisticaldatasets.data-planet.com.ezproxy.stanford.edu/dataplanet/Datasets.html">EzProxy</a> and export <em>CSV</em></li>
 <li>Supposedly <a href="http://homepage.data-planet.com/content-syndication">has API(?)</a>, but <a href="http://homepage.data-planet.com/request-form">request form is not accessible</a></li>
 </ul></li>
-<li><a href="http://www.gallup.com/">Gallup Analytics</a> <strong>(*)</strong>
+<li><a href="http://www.gallup.com/">Gallup Analytics</a>
 <ul>
 <li>Stanford only, via <a href="https://analyticscampus-gallup-com.ezproxy.stanford.edu/">EzProxy</a></li>
 <li>Data download through web interface as <em>XLSX</em> only – <strong>broken or disabled(?)</strong></li>
 </ul></li>
-<li><a href="http://icpsr.umich.edu/">ICPSR</a> <strong>(*)</strong>
+<li><a href="http://icpsr.umich.edu/">ICPSR</a>
 <ul>
 <li>R package <a href="https://cran.r-project.org/package=icpsrdata"><code>icpsrdata</code></a> <a href="https://github.com/fsolt/icpsrdata">(GitHub)</a></li>
 </ul></li>
-<li><a href="http://data.imf.org/">IMF</a> <strong>(*)</strong>
+<li><a href="http://data.imf.org/">IMF</a>
 <ul>
 <li><a href="http://datahelp.imf.org/knowledgebase/articles/630877-api">Has API</a></li>
 <li>R packages:
@@ -270,7 +269,7 @@ $(document).ready(function () {
 <li><a href="https://github.com/mingjerli/rWEO"><code>rWEO</code></a> for IMF-WEO data</li>
 </ul></li>
 </ul></li>
-<li><a href="http://maplight.org/data">MapLight</a> <strong>(*)</strong>
+<li><a href="http://maplight.org/data">MapLight</a>
 <ul>
 <li><a href="http://maplight.org/apis/bill-positions">Bill Positions</a> has <a href="http://maplight.org/services_open_api">API</a></li>
 <li><a href="https://github.com/hadley/maplight-data">Some R code from Hadley Wickham</a> (not a package!). Last commit several years back, but still seems to work.</li>
@@ -300,12 +299,12 @@ $(document).ready(function () {
 <li>Use generic <a href="https://dev.socrata.com/connectors/rsocrata.html">Socrata Open Data API</a></li>
 <li>R package <a href="https://cran.r-project.org/package=RSocrata"><code>RSocrata</code></a> <a href="https://github.com/Chicago/RSocrata">(GitHub)</a></li>
 </ul></li>
-<li><a href="http://geographicresearch.com/simplymap/">SimplyMap</a>
+<li><a href="https://www.policymap.com">PolicyMap</a>
 <ul>
-<li>Stanford extended access via <a href="http://simplymap.com/" class="uri">http://simplymap.com/</a> – need to be either on campus, or use VPN or set up browser proxy. 5 concurrent licenses.</li>
+<li>Stanford access via <a href="https://stanford.policymap.com/" class="uri">https://stanford.policymap.com/</a> – need to be either on campus, or use VPN or set up browser proxy. 5 concurrent licenses.</li>
 <li>Manual data download, no remote access (guest account allows to download <em>CSV</em>, Stanford access allows to download <em>SHP</em> as well)</li>
 </ul></li>
-<li><a href="http://data.worldbank.org">World Bank</a> <strong>(*)</strong>
+<li><a href="http://data.worldbank.org">World Bank</a>
 <ul>
 <li>Currently <a href="http://databank.worldbank.org/data/databases.aspx">60 databases</a></li>
 <li><a href="https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information">Has API</a></li>
@@ -317,7 +316,7 @@ $(document).ready(function () {
 <li><a href="https://github.com/ropensci/rWBclimate"><code>rWBclimate</code></a> for the World Bank climate data</li>
 </ul></li>
 </ul></li>
-<li><a href="https://wrds-web.wharton.upenn.edu/wrds/">Wharton Research Data Services</a> (WRDS) <strong>(*)</strong>
+<li><a href="https://wrds-web.wharton.upenn.edu/wrds/">Wharton Research Data Services</a> (WRDS)
 <ul>
 <li>Stanford login via <a href="http://wrds-web.wharton.upenn.edu.gsbproxy.stanford.edu/wrds/connect/">GSB</a></li>
 <li>Data access via remote connection to SAS/SHARE server, which allows direct query of WRDS data via standard database queries, using their (remote) R version.</li>

@@ -1,17 +1,16 @@
 ---
-title: "Accessing SUL Provided Social Science Data with R"
+title: "Accessing SL Provided Social Science Data with R"
 author: 'Online at: bit.ly/sul-db-R'
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` --  cengel @ stanford"
 output: pdf_document
 ---
 
-The Stanford Libraries offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
+The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
 
-Data providers marked with __(\*)__ are presenters at the _[Social Science Gear Up 2016 event](https://library.stanford.edu/projects/gear-research)_.
 
-## Data from SUL
+## Data from SL
 
-- [Bloomberg](http://www.bloomberg.com) __(\*)__
+- [Bloomberg](http://www.bloomberg.com) 
     - Restricted to designated machines at GSB
     - Details here: http://libguides.stanford.edu/bloomberg
 
@@ -22,7 +21,7 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
 - [California Attorney General’s Open Justice Portal](http://openjustice.doj.ca.gov/index.html) 
     - Use `read.csv(url("http:..."))` to load _CSV_ from [their data portal](http://openjustice.doj.ca.gov/data).  
   
-- [Census public/RDC](http://www.census.gov) __(\*)__   
+- [Census public/RDC](http://www.census.gov)   
     - Public census [has APIs](http://www.census.gov/data/developers/data-sets.html) 
     - RDC restricted to designated, offline machines
     - R packages: 
@@ -36,28 +35,28 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
         - [Getting data from the ACS into R](http://spatialdemography.org/wp-content/uploads/2013/04/9.-Sparks.pdf)
         - [Performing spatial regression modeling in R with ACS data](http://spatialdemography.org/wp-content/uploads/2013/10/6.-Sparks.pdf)
 
-- [CoreLogic](http://www.corelogic.com) __(\*)__  
+- [CoreLogic](http://www.corelogic.com) 
     - Stanford only, download _XLS_ [from Stanford Digital Repository](https://purl.stanford.edu/pv311by5369) 
     - **need to read End User License Agreement before use**
 
-- [DataPlanet](http://data-planet.com) __(\*)__ 
+- [DataPlanet](http://data-planet.com)  
     - Stanford only via [EzProxy](http://statisticaldatasets.data-planet.com.ezproxy.stanford.edu/dataplanet/Datasets.html) and export _CSV_
     - Supposedly [has API(?)](http://homepage.data-planet.com/content-syndication), but [request form is not accessible](http://homepage.data-planet.com/request-form) 
 
-- [Gallup Analytics](http://www.gallup.com/) __(\*)__  
+- [Gallup Analytics](http://www.gallup.com/)  
     - Stanford only, via [EzProxy](https://analyticscampus-gallup-com.ezproxy.stanford.edu/) 
     - Data download through web interface as _XLSX_ only -- **broken or disabled(?)**
     
-- [ICPSR](http://icpsr.umich.edu/) __(\*)__
+- [ICPSR](http://icpsr.umich.edu/) 
     - R package [`icpsrdata`](https://cran.r-project.org/package=icpsrdata) [(GitHub)](https://github.com/fsolt/icpsrdata)  
 
-- [IMF](http://data.imf.org/) __(\*)__
+- [IMF](http://data.imf.org/) 
     - [Has API](http://datahelp.imf.org/knowledgebase/articles/630877-api) 
     - R packages:
         - [`IMFData`](https://cran.r-project.org/package=IMFData) [(GitHub)](https://github.com/mingjerli/IMFData) 
         - [`rWEO`](https://github.com/mingjerli/rWEO) for IMF-WEO data 
     
-- [MapLight](http://maplight.org/data) __(\*)__
+- [MapLight](http://maplight.org/data) 
     - [Bill Positions](http://maplight.org/apis/bill-positions) has [API](http://maplight.org/services_open_api) 
     - [Some R code from Hadley Wickham](https://github.com/hadley/maplight-data) (not a package!). Last commit several years back, but still seems to work.
     - Download [California Money and Politics Bulk Data Set](http://maplight.org/data/get/california-money-and-politics-dataset) and [Federal Money and Politics Data Set](http://maplight.org/data/get/federal-money-and-politics-dataset) as zipped _CSV_, like [this](http://stackoverflow.com/a/3053883/2630957).
@@ -81,11 +80,11 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
     - Use generic [Socrata Open Data API](https://dev.socrata.com/connectors/rsocrata.html) 
     - R package [`RSocrata`](https://cran.r-project.org/package=RSocrata) [(GitHub)](https://github.com/Chicago/RSocrata) 
 
-- [SimplyMap](http://geographicresearch.com/simplymap/)
-    - Stanford extended access via http://simplymap.com/ -- need to be either on campus, or use VPN or set up browser proxy. 5 concurrent licenses.
+- [PolicyMap](https://www.policymap.com)
+    - Stanford access via https://stanford.policymap.com/ -- need to be either on campus, or use VPN or set up browser proxy. 5 concurrent licenses.
     - Manual data download, no remote access (guest account allows to download _CSV_, Stanford access allows to download _SHP_ as well)
 
-- [World Bank](http://data.worldbank.org) __(\*)__ 
+- [World Bank](http://data.worldbank.org)  
     - Currently [60 databases](http://databank.worldbank.org/data/databases.aspx)
     - [Has API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)
     - R packages: 
@@ -94,7 +93,7 @@ Data providers marked with __(\*)__ are presenters at the _[Social Science Gear 
         - [`rWBData`](https://github.com/mingjerli/rWBData)
         - [`rWBclimate`](https://github.com/ropensci/rWBclimate) for the World Bank climate data
     
-- [Wharton Research Data Services](https://wrds-web.wharton.upenn.edu/wrds/) (WRDS)  __(\*)__
+- [Wharton Research Data Services](https://wrds-web.wharton.upenn.edu/wrds/) (WRDS)  
     - Stanford login via [GSB](http://wrds-web.wharton.upenn.edu.gsbproxy.stanford.edu/wrds/connect/)
     - Data access via remote connection to SAS/SHARE server, which allows direct query of WRDS data via standard database queries, using their (remote) R version.
     - Documentation: 
