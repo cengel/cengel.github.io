@@ -122,6 +122,7 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`USAboundaries`](https://CRAN.R-project.org/package=USAboundaries): Historical boundaries of the United States. Map the United States (or the colonies that became the United States) on any date from 1629 to 2000. Contains both county and state/territory level polygons.
 - [`rdatacite`](https://CRAN.R-project.org/package=rdatacite) Client for the web service methods provided by [DataCite](https://www.datacite.org/)
 - [`roadoi`](https://CRAN.R-project.org/package=roadoi): Find Free Versions of Scholarly Publications via the [oaDOI Service](https://oadoi.org)
+- [`data.world`](https://cran.rstudio.com/web/packages/data.world/):  High-level tools for working with [data.world](https://data.world) data sets.
 
 (A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 
