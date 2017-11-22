@@ -56,6 +56,9 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
         - [`IMFData`](https://cran.r-project.org/package=IMFData) [(GitHub)](https://github.com/mingjerli/IMFData) 
         - [`rWEO`](https://github.com/mingjerli/rWEO) for IMF-WEO data 
     
+- [IPUMS](https://www.ipums.org/)
+    - R package [`ipumsr`](https://cran.r-project.org/package=ipumsr) to import census, survey and geographic data provided by IPUMS into R. Great [vignette](https://cran.rstudio.com/web/packages/ipumsr/vignettes/ipums.html), also for [Value labels](https://cran.rstudio.com/web/packages/ipumsr/vignettes/value-labels.html), [Current Population Survey (CPS)](https://cran.rstudio.com/web/packages/ipumsr/vignettes/ipums-cps.html), [Geographic Data](https://cran.rstudio.com/web/packages/ipumsr/vignettes/ipums-geography.html), and [use of NHGIS](https://cran.rstudio.com/web/packages/ipumsr/vignettes/ipums-nhgis.html).
+
 - [MapLight](http://maplight.org/data) 
     - [Bill Positions](http://maplight.org/apis/bill-positions) has [API](http://maplight.org/services_open_api) 
     - [Some R code from Hadley Wickham](https://github.com/hadley/maplight-data) (not a package!). Last commit several years back, but still seems to work.
