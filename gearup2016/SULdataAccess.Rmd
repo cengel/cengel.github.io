@@ -37,7 +37,7 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 
 - [CoreLogic](http://www.corelogic.com) 
     - Stanford only, download _XLS_ [from Stanford Digital Repository](https://purl.stanford.edu/pv311by5369) 
-    - **need to read End User License Agreement before use**
+    - **need to read and sign End User License Agreement before use**
 
 - [DataPlanet](http://data-planet.com)  
     - Stanford only via [EzProxy](http://statisticaldatasets.data-planet.com.ezproxy.stanford.edu/dataplanet/Datasets.html) and export _CSV_
@@ -126,6 +126,9 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`rdatacite`](https://CRAN.R-project.org/package=rdatacite) Client for the web service methods provided by [DataCite](https://www.datacite.org/)
 - [`roadoi`](https://CRAN.R-project.org/package=roadoi): Find Free Versions of Scholarly Publications via the [oaDOI Service](https://oadoi.org)
 - [`data.world`](https://cran.rstudio.com/web/packages/data.world/):  High-level tools for working with [data.world](https://data.world) data sets.
+- [`jstor`](https://github.com/tklebel/jstor): Import journal data from DfR (JSTOR)
+- [`fulltext`](https://CRAN.R-project.org/package=fulltext): A single interface to full text sources 'scholarly' data, including 'Biomed Central', Public Library of Science, 'Pubmed Central', 'eLife', and more. [(Manual)](https://ropensci.org/technotes/2018/01/17/fulltext-v1/)
+
 
 (A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 

@@ -21,8 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +31,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -199,7 +201,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Accessing SL Provided Social Science Data with R</h1>
 <h4 class="author"><em>Online at: bit.ly/sul-db-R</em></h4>
-<h4 class="date"><em>Last updated: November 22, 2017 – cengel @ stanford</em></h4>
+<h4 class="date"><em>Last updated: February 08, 2018 – cengel @ stanford</em></h4>
 
 </div>
 
@@ -244,7 +246,7 @@ $(document).ready(function () {
 <li><a href="http://www.corelogic.com">CoreLogic</a>
 <ul>
 <li>Stanford only, download <em>XLS</em> <a href="https://purl.stanford.edu/pv311by5369">from Stanford Digital Repository</a></li>
-<li><strong>need to read End User License Agreement before use</strong></li>
+<li><strong>need to read and sign End User License Agreement before use</strong></li>
 </ul></li>
 <li><a href="http://data-planet.com">DataPlanet</a>
 <ul>
@@ -361,6 +363,8 @@ $(document).ready(function () {
 <li><a href="https://CRAN.R-project.org/package=rdatacite"><code>rdatacite</code></a> Client for the web service methods provided by <a href="https://www.datacite.org/">DataCite</a></li>
 <li><a href="https://CRAN.R-project.org/package=roadoi"><code>roadoi</code></a>: Find Free Versions of Scholarly Publications via the <a href="https://oadoi.org">oaDOI Service</a></li>
 <li><a href="https://cran.rstudio.com/web/packages/data.world/"><code>data.world</code></a>: High-level tools for working with <a href="https://data.world">data.world</a> data sets.</li>
+<li><a href="https://github.com/tklebel/jstor"><code>jstor</code></a>: Import journal data from DfR (JSTOR)</li>
+<li><a href="https://CRAN.R-project.org/package=fulltext"><code>fulltext</code></a>: A single interface to full text sources ‘scholarly’ data, including ‘Biomed Central’, Public Library of Science, ‘Pubmed Central’, ‘eLife’, and more. <a href="https://ropensci.org/technotes/2018/01/17/fulltext-v1/">(Manual)</a></li>
 </ul>
 <p>(A number of packages are from <a href="https://ropensci.org/" class="uri">https://ropensci.org/</a>. You may want to check there for new ones.)</p>
 </div>
