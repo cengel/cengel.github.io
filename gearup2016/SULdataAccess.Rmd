@@ -1,11 +1,11 @@
 ---
-title: "Accessing SL Provided Social Science Data with R"
+title: "Accessing Social Science Data with R"
 author: 'Online at: bit.ly/sul-db-R'
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` --  cengel @ stanford"
 output: pdf_document
 ---
 
-The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
+The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. I am also adding packages tp access social science data beyond Stanford. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
 
 
 ## Data from SL
@@ -29,6 +29,7 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
         - [UScensus2010](https://cran.r-project.org/package=UScensus2010)
         - [tigris](https://cran.r-project.org/package=tigris)
         - [tidycensus](https://CRAN.R-project.org/package=tidycensus): Loads US Census boundary and attribute data as `tidyverse` and `sf`-ready data frames
+        - [totalcensus](https://CRAN.R-project.org/package=totalcensus): Download summary files and extract data at block, block group, and tract level.
         - [censusapi](https://CRAN.R-project.org/package=censusapi): A wrapper for the US Census Bureau APIs that returns data frames of Census data and metadata.
         - [idbr](https://CRAN.R-project.org/package=idbr): US Census Bureau's International Data Base
     - References, slighty outdated: 
@@ -124,11 +125,24 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`pleiades`](https://CRAN.R-project.org/package=pleiades): Interface to the [Pleiades Archeological Database](https://pleiades.stoa.org/)
 - [`USAboundaries`](https://CRAN.R-project.org/package=USAboundaries): Historical boundaries of the United States. Map the United States (or the colonies that became the United States) on any date from 1629 to 2000. Contains both county and state/territory level polygons.
 - [`rdatacite`](https://CRAN.R-project.org/package=rdatacite) Client for the web service methods provided by [DataCite](https://www.datacite.org/)
-- [`roadoi`](https://CRAN.R-project.org/package=roadoi): Find Free Versions of Scholarly Publications via the [oaDOI Service](https://oadoi.org)
+- [`roadoi`](https://CRAN.R-project.org/package=roadoi): Find Free Versions of Scholarly Publications via [Unpaywall](https://unpaywall.org/products/api)
 - [`data.world`](https://cran.rstudio.com/web/packages/data.world/):  High-level tools for working with [data.world](https://data.world) data sets.
 - [`jstor`](https://github.com/tklebel/jstor): Import journal data from DfR (JSTOR)
 - [`fulltext`](https://CRAN.R-project.org/package=fulltext): A single interface to full text sources 'scholarly' data, including 'Biomed Central', Public Library of Science, 'Pubmed Central', 'eLife', and more. [(Manual)](https://ropensci.org/technotes/2018/01/17/fulltext-v1/)
 - [`qualtRics`](https://CRAN.R-project.org/package=qualtRics): Convenience functions to pull survey results straight into R using the Qualtrics API.
+- [`essurvey`](https://CRAN.R-project.org/package=essurvey): Download data from the [European Social Survey](http://www.europeansocialsurvey.org/).
+- [`RefManageR`](https://CRAN.R-project.org/package=RefManageR): Import and work with bibliographic references. Stores with `BibTeX` and `BibLaTeX` references, interfaces with `NCBI Entrez`, `CrossRef`, and `Zotero`, extracts references from locally stored PDF and generates bibliographies for `RMarkdown`.
+
+- geospatial data:
+    - [`getlandsat`](https://CRAN.R-project.org/package=getlandsat): Get Landsat 8 Data from [Amazon Public Data Sets](https://registry.opendata.aws/landsat-8/)
+    - [`FedData`](https://CRAN.R-project.org/package=FedData): Download geospatial Data from federated data sources, including the The National Elevation Dataset digital elevation models, the Global Historical Climatology Network, the National Land Cover Database, and more.
+    - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.
+
+
+    - https://cran.rstudio.com/web/packages/FedData/
+https://cran.rstudio.com/web/packages/bikedata/
+https://cran.rstudio.com/web/packages/stplanr/
+
 
 (A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 
