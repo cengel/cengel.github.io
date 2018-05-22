@@ -138,11 +138,5 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
     - [`FedData`](https://CRAN.R-project.org/package=FedData): Download geospatial Data from federated data sources, including the The National Elevation Dataset digital elevation models, the Global Historical Climatology Network, the National Land Cover Database, and more.
     - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.
 
-
-    - https://cran.rstudio.com/web/packages/FedData/
-https://cran.rstudio.com/web/packages/bikedata/
-https://cran.rstudio.com/web/packages/stplanr/
-
-
 (A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 

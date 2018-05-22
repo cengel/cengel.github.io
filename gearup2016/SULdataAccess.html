@@ -12,7 +12,7 @@
 <meta name="author" content="Online at: bit.ly/sul-db-R" />
 
 
-<title>Accessing SL Provided Social Science Data with R</title>
+<title>Accessing Social Science Data with R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -199,14 +199,14 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Accessing SL Provided Social Science Data with R</h1>
+<h1 class="title toc-ignore">Accessing Social Science Data with R</h1>
 <h4 class="author"><em>Online at: bit.ly/sul-db-R</em></h4>
-<h4 class="date"><em>Last updated: March 02, 2018 – cengel @ stanford</em></h4>
+<h4 class="date"><em>Last updated: May 21, 2018 – cengel @ stanford</em></h4>
 
 </div>
 
 
-<p>The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. It is work in progress. (<a href="https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf">Download as pdf.</a>)</p>
+<p>The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. I am also adding packages tp access social science data beyond Stanford. It is work in progress. (<a href="https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf">Download as pdf.</a>)</p>
 <div id="data-from-sl" class="section level2">
 <h2>Data from SL</h2>
 <ul>
@@ -234,6 +234,7 @@ $(document).ready(function () {
 <li><a href="https://cran.r-project.org/package=UScensus2010">UScensus2010</a></li>
 <li><a href="https://cran.r-project.org/package=tigris">tigris</a></li>
 <li><a href="https://CRAN.R-project.org/package=tidycensus">tidycensus</a>: Loads US Census boundary and attribute data as <code>tidyverse</code> and <code>sf</code>-ready data frames</li>
+<li><a href="https://CRAN.R-project.org/package=totalcensus">totalcensus</a>: Download summary files and extract data at block, block group, and tract level.</li>
 <li><a href="https://CRAN.R-project.org/package=censusapi">censusapi</a>: A wrapper for the US Census Bureau APIs that returns data frames of Census data and metadata.</li>
 <li><a href="https://CRAN.R-project.org/package=idbr">idbr</a>: US Census Bureau’s International Data Base</li>
 </ul></li>
@@ -361,11 +362,19 @@ $(document).ready(function () {
 <li><a href="https://CRAN.R-project.org/package=pleiades"><code>pleiades</code></a>: Interface to the <a href="https://pleiades.stoa.org/">Pleiades Archeological Database</a></li>
 <li><a href="https://CRAN.R-project.org/package=USAboundaries"><code>USAboundaries</code></a>: Historical boundaries of the United States. Map the United States (or the colonies that became the United States) on any date from 1629 to 2000. Contains both county and state/territory level polygons.</li>
 <li><a href="https://CRAN.R-project.org/package=rdatacite"><code>rdatacite</code></a> Client for the web service methods provided by <a href="https://www.datacite.org/">DataCite</a></li>
-<li><a href="https://CRAN.R-project.org/package=roadoi"><code>roadoi</code></a>: Find Free Versions of Scholarly Publications via the <a href="https://oadoi.org">oaDOI Service</a></li>
+<li><a href="https://CRAN.R-project.org/package=roadoi"><code>roadoi</code></a>: Find Free Versions of Scholarly Publications via <a href="https://unpaywall.org/products/api">Unpaywall</a></li>
 <li><a href="https://cran.rstudio.com/web/packages/data.world/"><code>data.world</code></a>: High-level tools for working with <a href="https://data.world">data.world</a> data sets.</li>
 <li><a href="https://github.com/tklebel/jstor"><code>jstor</code></a>: Import journal data from DfR (JSTOR)</li>
 <li><a href="https://CRAN.R-project.org/package=fulltext"><code>fulltext</code></a>: A single interface to full text sources ‘scholarly’ data, including ‘Biomed Central’, Public Library of Science, ‘Pubmed Central’, ‘eLife’, and more. <a href="https://ropensci.org/technotes/2018/01/17/fulltext-v1/">(Manual)</a></li>
 <li><a href="https://CRAN.R-project.org/package=qualtRics"><code>qualtRics</code></a>: Convenience functions to pull survey results straight into R using the Qualtrics API.</li>
+<li><a href="https://CRAN.R-project.org/package=essurvey"><code>essurvey</code></a>: Download data from the <a href="http://www.europeansocialsurvey.org/">European Social Survey</a>.</li>
+<li><p><a href="https://CRAN.R-project.org/package=RefManageR"><code>RefManageR</code></a>: Import and work with bibliographic references. Stores with <code>BibTeX</code> and <code>BibLaTeX</code> references, interfaces with <code>NCBI Entrez</code>, <code>CrossRef</code>, and <code>Zotero</code>, extracts references from locally stored PDF and generates bibliographies for <code>RMarkdown</code>.</p></li>
+<li>geospatial data:
+<ul>
+<li><a href="https://CRAN.R-project.org/package=getlandsat"><code>getlandsat</code></a>: Get Landsat 8 Data from <a href="https://registry.opendata.aws/landsat-8/">Amazon Public Data Sets</a></li>
+<li><a href="https://CRAN.R-project.org/package=FedData"><code>FedData</code></a>: Download geospatial Data from federated data sources, including the The National Elevation Dataset digital elevation models, the Global Historical Climatology Network, the National Land Cover Database, and more.</li>
+<li>[<code>bikedata</code>] (<a href="https://CRAN.R-project.org/package=bikedata" class="uri">https://CRAN.R-project.org/package=bikedata</a>) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.</li>
+</ul></li>
 </ul>
 <p>(A number of packages are from <a href="https://ropensci.org/" class="uri">https://ropensci.org/</a>. You may want to check there for new ones.)</p>
 </div>
