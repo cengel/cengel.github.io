@@ -132,11 +132,16 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`qualtRics`](https://CRAN.R-project.org/package=qualtRics): Convenience functions to pull survey results straight into R using the Qualtrics API.
 - [`essurvey`](https://CRAN.R-project.org/package=essurvey): Download data from the [European Social Survey](http://www.europeansocialsurvey.org/).
 - [`RefManageR`](https://CRAN.R-project.org/package=RefManageR): Import and work with bibliographic references. Stores with `BibTeX` and `BibLaTeX` references, interfaces with `NCBI Entrez`, `CrossRef`, and `Zotero`, extracts references from locally stored PDF and generates bibliographies for `RMarkdown`.
+- [`nomisr`](https://cran.r-project.org/package=nomisr): UK official statistics from the 'Nomis' database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the [Office for National Statistics](https://www.nomisweb.co.uk).
 
 - geospatial data:
     - [`getlandsat`](https://CRAN.R-project.org/package=getlandsat): Get Landsat 8 Data from [Amazon Public Data Sets](https://registry.opendata.aws/landsat-8/)
     - [`FedData`](https://CRAN.R-project.org/package=FedData): Download geospatial Data from federated data sources, including the The National Elevation Dataset digital elevation models, the Global Historical Climatology Network, the National Land Cover Database, and more.
-    - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.
+    - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.  
+    
+    
+- data wrangling
+    - [`naniar`](https://CRAN.R-project.org/package=naniar): explore missing values 
 
 (A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 
