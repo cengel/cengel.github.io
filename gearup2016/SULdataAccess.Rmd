@@ -133,6 +133,7 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`essurvey`](https://CRAN.R-project.org/package=essurvey): Download data from the [European Social Survey](http://www.europeansocialsurvey.org/).
 - [`RefManageR`](https://CRAN.R-project.org/package=RefManageR): Import and work with bibliographic references. Stores with `BibTeX` and `BibLaTeX` references, interfaces with `NCBI Entrez`, `CrossRef`, and `Zotero`, extracts references from locally stored PDF and generates bibliographies for `RMarkdown`.
 - [`nomisr`](https://cran.r-project.org/package=nomisr): UK official statistics from the 'Nomis' database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the [Office for National Statistics](https://www.nomisweb.co.uk).
+- [`fingertipsR`](https://cran.r-project.org/package=fingertipsR): [Public health indicators in England](https://fingertips.phe.org.uk)
 
 - geospatial data:
     - [`getlandsat`](https://CRAN.R-project.org/package=getlandsat): Get Landsat 8 Data from [Amazon Public Data Sets](https://registry.opendata.aws/landsat-8/)
