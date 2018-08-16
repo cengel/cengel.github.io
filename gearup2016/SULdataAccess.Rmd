@@ -116,6 +116,7 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
     - [`Rtreasuryio`](https://github.com/csvsoundsystem/Rtreasuryio): a single, simple function for submitting SQL queries to [`treasury.io`](http://treasury.io)
 - [`enigma`](https://CRAN.R-project.org/package=enigma): a client to interact with the [Enigma](https://public.enigma.com) API, including getting the data and metadata for datasets as well as collecting statistics on datasets. (Note that there is another site: [Enigma Public](https://public.enigma.com) "the world’s broadest collection of public data" which provides API access as well, not sure how the two are related with regard to this package.)
 - [`pdfetch`](https://CRAN.R-project.org/package=pdfetch): Economic and financial time series from public sources, including the St Louis Fed's FRED system, Yahoo Finance, the US Bureau of Labor Statistics, the US Energy Information Administration, the World Bank, Eurostat, the European Central Bank, the Bank of England, the UK's Office of National Statistics, Deutsche Bundesbank, and INSEE.
+- [`fredr`](https://CRAN.R-project.org/package=fredr): An R client for the [Federal Reserve Economic Data (FRED) API](https://api.stlouisfed.org).
 - [`eechidna`](https://CRAN.R-project.org/package=eechidna): 2013 and 2016 Australian Federal Election (House of Representatives) and the 2011 Australian Census
 - [`rtimes`](https://CRAN.R-project.org/package=rtimes): Interface to Congress, Campaign Finance, Article Search, and Geographic APIs from the [New York Times](http://developer.nytimes.com/) and [ProPublica](https://www.propublica.org/datastore/apis). Covers only a subset of the APIs.
 - [`crminer`](https://CRAN.R-project.org/package=crminer) and [`rcrossref`](https://CRAN.R-project.org/package=rcrossref): Text mining client for [Crossref](<https://crossref.org>). Includes functions for getting getting links to full text of articles, fetching full text articles from those links or Digital Object Identifiers (DOIs), and text extraction from PDFs. `rcrossref` is for metadata.
@@ -129,17 +130,27 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`data.world`](https://cran.rstudio.com/web/packages/data.world/):  High-level tools for working with [data.world](https://data.world) data sets.
 - [`jstor`](https://github.com/tklebel/jstor): Import journal data from DfR (JSTOR)
 - [`fulltext`](https://CRAN.R-project.org/package=fulltext): A single interface to full text sources 'scholarly' data, including 'Biomed Central', Public Library of Science, 'Pubmed Central', 'eLife', and more. [(Manual)](https://ropensci.org/technotes/2018/01/17/fulltext-v1/)
-- [`qualtRics`](https://CRAN.R-project.org/package=qualtRics): Convenience functions to pull survey results straight into R using the Qualtrics API.
+- [`qualtRics`](https://CRAN.R-project.org/package=qualtRics): Convenience functions to pull survey results straight into R using the Qualtrics API. (**package archived 2018-02-05**)
 - [`essurvey`](https://CRAN.R-project.org/package=essurvey): Download data from the [European Social Survey](http://www.europeansocialsurvey.org/).
 - [`RefManageR`](https://CRAN.R-project.org/package=RefManageR): Import and work with bibliographic references. Stores with `BibTeX` and `BibLaTeX` references, interfaces with `NCBI Entrez`, `CrossRef`, and `Zotero`, extracts references from locally stored PDF and generates bibliographies for `RMarkdown`.
 - [`nomisr`](https://cran.r-project.org/package=nomisr): UK official statistics from the 'Nomis' database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the [Office for National Statistics](https://www.nomisweb.co.uk).
 - [`fingertipsR`](https://cran.r-project.org/package=fingertipsR): [Public health indicators in England](https://fingertips.phe.org.uk)
+- [`Quandl`] (https://CRAN.R-project.org/package=Quandl): Access to financial, economic, and alternative datasets from [Quandl](https://www.quandl.com/). ([Documentation](https://www.quandl.com/tools/r))
+- [`quantmod`] (https://CRAN.R-project.org/package=quantmod): Quantitative Financial Modelling & Trading Framework. ([Documentation](http://www.quantmod.com))
+- [`tidyquant`] (https://CRAN.R-project.org/package=tidyquant):  A wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions that returns the objects in the tidy 'tibble' format.
+- [`rdhs`](https://github.com/OJWatson/rdhs): Management and analysis of [Demographic and Health Survey (DHS)](https://dhsprogram.com/data/available-datasets.cfm) data. Not on CRAN yet.
 
 - geospatial data:
     - [`getlandsat`](https://CRAN.R-project.org/package=getlandsat): Get Landsat 8 Data from [Amazon Public Data Sets](https://registry.opendata.aws/landsat-8/)
     - [`FedData`](https://CRAN.R-project.org/package=FedData): Download geospatial Data from federated data sources, including the The National Elevation Dataset digital elevation models, the Global Historical Climatology Network, the National Land Cover Database, and more.
-    - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.  
+    - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia. 
+    - [`MODIStsp`] (https://CRAN.R-project.org/package=MODIStsp): automates the creation of time series of rasters derived from [MODIS Land Products data](https://dhsprogram.com/data/available-datasets.cfm)
+
     
+    
+   
+
+
     
 - data wrangling
     - [`naniar`](https://CRAN.R-project.org/package=naniar): explore missing values 
