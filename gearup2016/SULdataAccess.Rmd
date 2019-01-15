@@ -1,8 +1,10 @@
 ---
 title: "Accessing Social Science Data with R"
 author: 'Online at: bit.ly/sul-db-R'
-date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` --  cengel @ stanford"
-output: pdf_document
+date: "Last updated: `r format(Sys.time(), '%B %d, %Y')` cengel @ stanford"
+output:
+  html_document:
+    df_print: paged
 ---
 
 The Stanford Libraries (SL) offer a number of datasets for social science research. This is a document detailing if and how those can be accessed when using R. I am also adding packages tp access social science data beyond Stanford. It is work in progress. ([Download as pdf.](https://github.com/cengel/cengel.github.io/raw/master/gearup2016/SULdataAccess.pdf))
@@ -138,7 +140,8 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`Quandl`] (https://CRAN.R-project.org/package=Quandl): Access to financial, economic, and alternative datasets from [Quandl](https://www.quandl.com/). ([Documentation](https://www.quandl.com/tools/r))
 - [`quantmod`] (https://CRAN.R-project.org/package=quantmod): Quantitative Financial Modelling & Trading Framework. ([Documentation](http://www.quantmod.com))
 - [`tidyquant`] (https://CRAN.R-project.org/package=tidyquant):  A wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions that returns the objects in the tidy 'tibble' format.
-- [`rdhs`](https://github.com/OJWatson/rdhs): Management and analysis of [Demographic and Health Survey (DHS)](https://dhsprogram.com/data/available-datasets.cfm) data. Not on CRAN yet.
+- [`rdhs`](https://CRAN.R-project.org/package=rdhs): Management and analysis of [Demographic and Health Survey (DHS)](https://dhsprogram.com/data/available-datasets.cfm) data.
+- [`refnet`](https://github.com/embruna/refnet): Read, organize, geocode, analyze, and visualize Clarivate Web of Knowledge/Web of Science, format reference data files for scientometric, social network, and Science of Science analyses. Not on CRAN.
 
 - geospatial data:
     - [`getlandsat`](https://CRAN.R-project.org/package=getlandsat): Get Landsat 8 Data from [Amazon Public Data Sets](https://registry.opendata.aws/landsat-8/)
@@ -146,14 +149,12 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
     - [`bikedata`] (https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia. 
     - [`MODIStsp`] (https://CRAN.R-project.org/package=MODIStsp): automates the creation of time series of rasters derived from [MODIS Land Products data](https://dhsprogram.com/data/available-datasets.cfm)
 
-    
-    
-   
 
 
     
 - data wrangling
     - [`naniar`](https://CRAN.R-project.org/package=naniar): explore missing values 
+    - [`visdat`](https://CRAN.R-project.org/package=visdat): visualise a dataframe (http://visdat.njtierney.com)
 
 (A number of packages are from  https://ropensci.org/. You may want to check there for new ones.)    
 
