@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Online at: bit.ly/sul-db-R" />
@@ -72,9 +72,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -88,7 +86,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -98,6 +95,9 @@ img {
 }
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -113,7 +113,6 @@ body {
   padding-top: 71px;
   margin-top: -71px;
 }
-
 .section h2 {
   padding-top: 71px;
   margin-top: -71px;
@@ -133,6 +132,43 @@ body {
 .section h6 {
   padding-top: 71px;
   margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -154,19 +190,74 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -205,8 +296,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Accessing Social Science Data with R</h1>
-<h4 class="author"><em>Online at: bit.ly/sul-db-R</em></h4>
-<h4 class="date"><em>Last updated: January 15, 2019 cengel @ stanford</em></h4>
+<h4 class="author">Online at: bit.ly/sul-db-R</h4>
+<h4 class="date">Last updated: December 13, 2020 cengel @ stanford</h4>
 
 </div>
 
@@ -227,7 +318,7 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="http://openjustice.doj.ca.gov/index.html">California Attorney General’s Open Justice Portal</a>
 <ul>
-<li>Use <code>read.csv(url(&quot;http:...&quot;))</code> to load <em>CSV</em> from <a href="http://openjustice.doj.ca.gov/data">their data portal</a>.</li>
+<li>Use <code>read.csv(url("http:..."))</code> to load <em>CSV</em> from <a href="http://openjustice.doj.ca.gov/data">their data portal</a>.</li>
 </ul></li>
 <li><a href="http://www.census.gov">Census public/RDC</a>
 <ul>
@@ -316,13 +407,18 @@ $(document).ready(function () {
 <li>Stanford access via <a href="https://stanford.policymap.com/" class="uri">https://stanford.policymap.com/</a> – need to be either on campus, or use VPN or set up browser proxy. 5 concurrent licenses.</li>
 <li>Manual data download, no remote access (guest account allows to download <em>CSV</em>, Stanford access allows to download <em>SHP</em> as well)</li>
 </ul></li>
+<li><a href="https://searchworks.stanford.edu/view/13718042">Washington Post</a>
+<ul>
+<li>Full text from 1968, though with varying coverage.</li>
+<li>To request access see the searchworks link.</li>
+</ul></li>
 <li><a href="http://data.worldbank.org">World Bank</a>
 <ul>
 <li>Currently <a href="http://databank.worldbank.org/data/databases.aspx">60 databases</a></li>
 <li><a href="https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information">Has API</a></li>
 <li>R packages:
 <ul>
-<li><a href="https://cran.r-project.org/package=WDI"><code>WDI</code></a> <a href="https://github.com/vincentarelbundock/WDI">(GitHub)</a></li>
+<li><a href="https://cran.r-project.org/package=WDI"><code>WDI</code></a> <a href="https://github.com/vincentarelbundock/WDI">(GitHub)</a> - <a href="https://medium.com/pew-research-center-decoded/using-apis-to-collect-website-data-b7fc340d59e3">(Tutorial)</a></li>
 <li><a href="https://cran.r-project.org/package=wbstats"><code>wbstats</code></a></li>
 <li><a href="https://github.com/mingjerli/rWBData"><code>rWBData</code></a></li>
 <li><a href="https://github.com/ropensci/rWBclimate"><code>rWBclimate</code></a> for the World Bank climate data</li>
@@ -344,58 +440,72 @@ $(document).ready(function () {
 <div id="other-r-packages" class="section level2">
 <h2>Other R packages</h2>
 <ul>
-<li>US Bureau of Labor Statistics (BLS):
+<li><p>US Bureau of Labor Statistics (BLS):</p>
 <ul>
 <li><a href="https://cran.r-project.org/package=rUnemploymentData"><code>rUnemploymentData</code></a></li>
 <li><a href="https://CRAN.R-project.org/package=blscrapeR"><code>blscrapeR</code></a></li>
 </ul></li>
-<li><a href="https://www.datacite.org/">DataCite</a>: <a href="https://cran.r-project.org/package=rdatacite"><code>rdatacite</code></a></li>
-<li>Medicare public files: <a href="https://CRAN.R-project.org/package=medicare"><code>medicare</code></a></li>
-<li>Social Media for Network Analysis: <a href="https://CRAN.R-project.org/package=SocialMediaLab"><code>SocialMediaLab</code></a></li>
-<li>United States Treasury
+<li><p><a href="https://www.datacite.org/">DataCite</a>: <a href="https://cran.r-project.org/package=rdatacite"><code>rdatacite</code></a></p></li>
+<li><p><a href="https://cran.r-project.org/package=citecorp"><code>citecorp</code></a>: Client for the <a href="http://opencitations.net/">Open Citations Corpus</a></p></li>
+<li><p><a href="https://cran.r-project.org/package=tradestatistics"><code>tradestatistics</code></a> R package to use the <a href="https://tradestatistics.io">Trade Statistics</a> API</p></li>
+<li><p><a href="https://cran.r-project.org/package=rdryad"><code>rdryad</code></a> is a package to interface with the <a href="https://datadryad.org/">Dryad</a> data repository <a href="https://datadryad.org/api/v2/docs/">API</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/package=rplos"><code>rplos</code></a>: Interface to the Search <a href="http://api.plos.org/">API</a> for <a href="http://plos.org/">PLoS (Public Library of Science) Journals</a></p></li>
+<li><p><a href="https://cran.r-project.org/package=rbace"><code>rbace</code></a>: <a href="https://www.base-search.net/">‘Bielefeld’ Academic Search Engine (‘BASE’)</a> Client</p></li>
+<li><p>Medicare public files: <a href="https://CRAN.R-project.org/package=medicare"><code>medicare</code></a></p></li>
+<li><p>Social Media for Network Analysis: <a href="https://CRAN.R-project.org/package=SocialMediaLab"><code>SocialMediaLab</code></a></p></li>
+<li><p>United States Treasury</p>
 <ul>
 <li><a href="https://github.com/csvsoundsystem/Rtreasuryio"><code>Rtreasuryio</code></a>: a single, simple function for submitting SQL queries to <a href="http://treasury.io"><code>treasury.io</code></a></li>
 </ul></li>
-<li><a href="https://CRAN.R-project.org/package=enigma"><code>enigma</code></a>: a client to interact with the <a href="https://public.enigma.com">Enigma</a> API, including getting the data and metadata for datasets as well as collecting statistics on datasets. (Note that there is another site: <a href="https://public.enigma.com">Enigma Public</a> “the world’s broadest collection of public data” which provides API access as well, not sure how the two are related with regard to this package.)</li>
-<li><a href="https://CRAN.R-project.org/package=pdfetch"><code>pdfetch</code></a>: Economic and financial time series from public sources, including the St Louis Fed’s FRED system, Yahoo Finance, the US Bureau of Labor Statistics, the US Energy Information Administration, the World Bank, Eurostat, the European Central Bank, the Bank of England, the UK’s Office of National Statistics, Deutsche Bundesbank, and INSEE.</li>
-<li><a href="https://CRAN.R-project.org/package=fredr"><code>fredr</code></a>: An R client for the <a href="https://api.stlouisfed.org">Federal Reserve Economic Data (FRED) API</a>.</li>
-<li><a href="https://CRAN.R-project.org/package=eechidna"><code>eechidna</code></a>: 2013 and 2016 Australian Federal Election (House of Representatives) and the 2011 Australian Census</li>
-<li><a href="https://CRAN.R-project.org/package=rtimes"><code>rtimes</code></a>: Interface to Congress, Campaign Finance, Article Search, and Geographic APIs from the <a href="http://developer.nytimes.com/">New York Times</a> and <a href="https://www.propublica.org/datastore/apis">ProPublica</a>. Covers only a subset of the APIs.</li>
-<li><a href="https://CRAN.R-project.org/package=crminer"><code>crminer</code></a> and <a href="https://CRAN.R-project.org/package=rcrossref"><code>rcrossref</code></a>: Text mining client for <a href="https://crossref.org">Crossref</a>. Includes functions for getting getting links to full text of articles, fetching full text articles from those links or Digital Object Identifiers (DOIs), and text extraction from PDFs. <code>rcrossref</code> is for metadata.</li>
-<li><a href="https://CRAN.R-project.org/package=rdpla"><code>rdpla</code></a>: Client for the <a href="https://dp.la">Digital Public Library of America (DPLA)</a>, using its <a href="https://dp.la/info/developers/codex/">REST API</a></li>
-<li><a href="https://CRAN.R-project.org/package=internetarchive"><code>internetarchive</code></a>: Search the <a href="https://archive.org/">Internet Archive</a>, retrieve metadata, and download files.</li>
-<li><a href="https://CRAN.R-project.org/package=patentsview"><code>patentsview</code></a>: An R Client for <a href="http://www.patentsview.org">PatentsView</a> with functions to simplify the <a href="http://www.patentsview.org/api/doc.html">PatentsView API</a> query language and parse the data that comes back.</li>
-<li><a href="https://CRAN.R-project.org/package=pleiades"><code>pleiades</code></a>: Interface to the <a href="https://pleiades.stoa.org/">Pleiades Archeological Database</a></li>
-<li><a href="https://CRAN.R-project.org/package=USAboundaries"><code>USAboundaries</code></a>: Historical boundaries of the United States. Map the United States (or the colonies that became the United States) on any date from 1629 to 2000. Contains both county and state/territory level polygons.</li>
-<li><a href="https://CRAN.R-project.org/package=rdatacite"><code>rdatacite</code></a> Client for the web service methods provided by <a href="https://www.datacite.org/">DataCite</a></li>
-<li><a href="https://CRAN.R-project.org/package=roadoi"><code>roadoi</code></a>: Find Free Versions of Scholarly Publications via <a href="https://unpaywall.org/products/api">Unpaywall</a></li>
-<li><a href="https://cran.rstudio.com/web/packages/data.world/"><code>data.world</code></a>: High-level tools for working with <a href="https://data.world">data.world</a> data sets.</li>
-<li><a href="https://github.com/tklebel/jstor"><code>jstor</code></a>: Import journal data from DfR (JSTOR)</li>
-<li><a href="https://CRAN.R-project.org/package=fulltext"><code>fulltext</code></a>: A single interface to full text sources ‘scholarly’ data, including ‘Biomed Central’, Public Library of Science, ‘Pubmed Central’, ‘eLife’, and more. <a href="https://ropensci.org/technotes/2018/01/17/fulltext-v1/">(Manual)</a></li>
-<li><a href="https://CRAN.R-project.org/package=qualtRics"><code>qualtRics</code></a>: Convenience functions to pull survey results straight into R using the Qualtrics API. (<strong>package archived 2018-02-05</strong>)</li>
-<li><a href="https://CRAN.R-project.org/package=essurvey"><code>essurvey</code></a>: Download data from the <a href="http://www.europeansocialsurvey.org/">European Social Survey</a>.</li>
-<li><a href="https://CRAN.R-project.org/package=RefManageR"><code>RefManageR</code></a>: Import and work with bibliographic references. Stores with <code>BibTeX</code> and <code>BibLaTeX</code> references, interfaces with <code>NCBI Entrez</code>, <code>CrossRef</code>, and <code>Zotero</code>, extracts references from locally stored PDF and generates bibliographies for <code>RMarkdown</code>.</li>
-<li><a href="https://cran.r-project.org/package=nomisr"><code>nomisr</code></a>: UK official statistics from the ‘Nomis’ database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the <a href="https://www.nomisweb.co.uk">Office for National Statistics</a>.</li>
-<li><a href="https://cran.r-project.org/package=fingertipsR"><code>fingertipsR</code></a>: <a href="https://fingertips.phe.org.uk">Public health indicators in England</a></li>
-<li>[<code>Quandl</code>] (<a href="https://CRAN.R-project.org/package=Quandl" class="uri">https://CRAN.R-project.org/package=Quandl</a>): Access to financial, economic, and alternative datasets from <a href="https://www.quandl.com/">Quandl</a>. (<a href="https://www.quandl.com/tools/r">Documentation</a>)</li>
-<li>[<code>quantmod</code>] (<a href="https://CRAN.R-project.org/package=quantmod" class="uri">https://CRAN.R-project.org/package=quantmod</a>): Quantitative Financial Modelling &amp; Trading Framework. (<a href="http://www.quantmod.com">Documentation</a>)</li>
-<li>[<code>tidyquant</code>] (<a href="https://CRAN.R-project.org/package=tidyquant" class="uri">https://CRAN.R-project.org/package=tidyquant</a>): A wrapper to various ‘xts’, ‘zoo’, ‘quantmod’, ‘TTR’ and ‘PerformanceAnalytics’ package functions that returns the objects in the tidy ‘tibble’ format.</li>
-<li><a href="https://CRAN.R-project.org/package=rdhs"><code>rdhs</code></a>: Management and analysis of <a href="https://dhsprogram.com/data/available-datasets.cfm">Demographic and Health Survey (DHS)</a> data.</li>
+<li><p><a href="https://CRAN.R-project.org/package=enigma"><code>enigma</code></a>: a client to interact with the <a href="https://public.enigma.com">Enigma</a> API, including getting the data and metadata for datasets as well as collecting statistics on datasets. (Note that there is another site: <a href="https://public.enigma.com">Enigma Public</a> “the world’s broadest collection of public data” which provides API access as well, not sure how the two are related with regard to this package.)</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=pdfetch"><code>pdfetch</code></a>: Economic and financial time series from public sources, including the St Louis Fed’s FRED system, Yahoo Finance, the US Bureau of Labor Statistics, the US Energy Information Administration, the World Bank, Eurostat, the European Central Bank, the Bank of England, the UK’s Office of National Statistics, Deutsche Bundesbank, and INSEE.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=fredr"><code>fredr</code></a>: An R client for the <a href="https://api.stlouisfed.org">Federal Reserve Economic Data (FRED) API</a>.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=eechidna"><code>eechidna</code></a>: 2013 and 2016 Australian Federal Election (House of Representatives) and the 2011 Australian Census</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=rtimes"><code>rtimes</code></a>: Interface to Congress, Campaign Finance, Article Search, and Geographic APIs from the <a href="http://developer.nytimes.com/">New York Times</a> and <a href="https://www.propublica.org/datastore/apis">ProPublica</a>. Covers only a subset of the APIs.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=crminer"><code>crminer</code></a> and <a href="https://CRAN.R-project.org/package=rcrossref"><code>rcrossref</code></a>: Text mining client for <a href="https://crossref.org">Crossref</a>. Includes functions for getting getting links to full text of articles, fetching full text articles from those links or Digital Object Identifiers (DOIs), and text extraction from PDFs. <code>rcrossref</code> is for metadata.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=rdpla"><code>rdpla</code></a>: Client for the <a href="https://dp.la">Digital Public Library of America (DPLA)</a>, using its <a href="https://dp.la/info/developers/codex/">REST API</a></p></li>
+<li><p><a href="https://CRAN.R-project.org/package=internetarchive"><code>internetarchive</code></a>: Search the <a href="https://archive.org/">Internet Archive</a>, retrieve metadata, and download files.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=patentsview"><code>patentsview</code></a>: An R Client for <a href="http://www.patentsview.org">PatentsView</a> with functions to simplify the <a href="http://www.patentsview.org/api/doc.html">PatentsView API</a> query language and parse the data that comes back.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=pleiades"><code>pleiades</code></a>: Interface to the <a href="https://pleiades.stoa.org/">Pleiades Archeological Database</a></p></li>
+<li><p><a href="https://CRAN.R-project.org/package=USAboundaries"><code>USAboundaries</code></a>: Historical boundaries of the United States. Map the United States (or the colonies that became the United States) on any date from 1629 to 2000. Contains both county and state/territory level polygons.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=rdatacite"><code>rdatacite</code></a> Client for the web service methods provided by <a href="https://www.datacite.org/">DataCite</a></p></li>
+<li><p><a href="https://CRAN.R-project.org/package=roadoi"><code>roadoi</code></a>: Find Free Versions of Scholarly Publications via <a href="https://unpaywall.org/products/api">Unpaywall</a></p></li>
+<li><p><a href="https://cran.rstudio.com/web/packages/data.world/"><code>data.world</code></a>: High-level tools for working with <a href="https://data.world">data.world</a> data sets.</p></li>
+<li><p><a href="https://github.com/tklebel/jstor"><code>jstor</code></a>: Import journal data from DfR (JSTOR)</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=fulltext"><code>fulltext</code></a>: A single interface to full text sources ‘scholarly’ data, including ‘Biomed Central’, Public Library of Science, ‘Pubmed Central’, ‘eLife’, and more. <a href="https://books.ropensci.org/fulltext/">(Manual)</a></p></li>
+<li><p><a href="https://CRAN.R-project.org/package=qualtRics"><code>qualtRics</code></a>: Convenience functions to pull survey results straight into R using the Qualtrics API. (<strong>package archived 2018-02-05</strong>)</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=essurvey"><code>essurvey</code></a>: Download data from the <a href="http://www.europeansocialsurvey.org/">European Social Survey</a>.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=RefManageR"><code>RefManageR</code></a>: Import and work with bibliographic references. Stores with <code>BibTeX</code> and <code>BibLaTeX</code> references, interfaces with <code>NCBI Entrez</code>, <code>CrossRef</code>, and <code>Zotero</code>, extracts references from locally stored PDF and generates bibliographies for <code>RMarkdown</code>.</p></li>
+<li><p><a href="https://cran.r-project.org/package=nomisr"><code>nomisr</code></a>: UK official statistics from the ‘Nomis’ database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the <a href="https://www.nomisweb.co.uk">Office for National Statistics</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/package=fingertipsR"><code>fingertipsR</code></a>: <a href="https://fingertips.phe.org.uk">Public health indicators in England</a></p></li>
+<li><p><a href="https://CRAN.R-project.org/package=Quandl"><code>Quandl</code></a>: Access to financial, economic, and alternative datasets from <a href="https://www.quandl.com/">Quandl</a>. (<a href="https://www.quandl.com/tools/r">Documentation</a>)</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=quantmod"><code>quantmod</code></a>: Quantitative Financial Modelling &amp; Trading Framework. (<a href="http://www.quantmod.com">Documentation</a>)</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=tidyquant"><code>tidyquant</code></a>: A wrapper to various ‘xts’, ‘zoo’, ‘quantmod’, ‘TTR’ and ‘PerformanceAnalytics’ package functions that returns the objects in the tidy ‘tibble’ format.</p></li>
+<li><p><a href="https://CRAN.R-project.org/package=rdhs"><code>rdhs</code></a>: Management and analysis of <a href="https://dhsprogram.com/data/available-datasets.cfm">Demographic and Health Survey (DHS)</a> data.</p></li>
 <li><p><a href="https://github.com/embruna/refnet"><code>refnet</code></a>: Read, organize, geocode, analyze, and visualize Clarivate Web of Knowledge/Web of Science, format reference data files for scientometric, social network, and Science of Science analyses. Not on CRAN.</p></li>
-<li>geospatial data:
+<li><p>geospatial data:</p>
 <ul>
-<li><a href="https://CRAN.R-project.org/package=getlandsat"><code>getlandsat</code></a>: Get Landsat 8 Data from <a href="https://registry.opendata.aws/landsat-8/">Amazon Public Data Sets</a></li>
+<li><a href="https://CRAN.R-project.org/package=bikedata"><code>bikedata</code></a> data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.</li>
 <li><a href="https://CRAN.R-project.org/package=FedData"><code>FedData</code></a>: Download geospatial Data from federated data sources, including the The National Elevation Dataset digital elevation models, the Global Historical Climatology Network, the National Land Cover Database, and more.</li>
-<li>[<code>bikedata</code>] (<a href="https://CRAN.R-project.org/package=bikedata" class="uri">https://CRAN.R-project.org/package=bikedata</a>) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.</li>
-<li>[<code>MODIStsp</code>] (<a href="https://CRAN.R-project.org/package=MODIStsp" class="uri">https://CRAN.R-project.org/package=MODIStsp</a>): automates the creation of time series of rasters derived from <a href="https://dhsprogram.com/data/available-datasets.cfm">MODIS Land Products data</a></li>
+<li><a href="https://CRAN.R-project.org/package=getlandsat"><code>getlandsat</code></a>: Get Landsat 8 Data from <a href="https://registry.opendata.aws/landsat-8/">Amazon Public Data Sets</a></li>
+<li><a href="https://cran.r-project.org/package=geonames"><code>geonames</code></a>: Interface to the “Geonames” Spatial Query Web Service</li>
+<li><a href="https://CRAN.R-project.org/package=MODIStsp"><code>MODIStsp</code></a>: automates the creation of time series of rasters derived from <a href="https://dhsprogram.com/data/available-datasets.cfm">MODIS Land Products data</a></li>
+<li><a href="https://cran.r-project.org/package=stats19"><code>stats19</code></a> Open Road Traffic Casualty Data from Great Britain</li>
 </ul></li>
-<li>data wrangling
+<li><p><a href="https://cran.r-project.org/package=rdataretriever"><code>rdataretriever</code></a>: Provides an R interface to the <a href="https://retriever.readthedocs.io/en/latest/">Data Retriever</a> via the Data Retriever’s command line interface. The Data Retriever automates the tasks of finding, downloading, and cleaning public datasets, and then stores them in a local database.</p></li>
+<li><p>data wrangling</p>
 <ul>
 <li><a href="https://CRAN.R-project.org/package=naniar"><code>naniar</code></a>: explore missing values</li>
 <li><a href="https://CRAN.R-project.org/package=visdat"><code>visdat</code></a>: visualise a dataframe (<a href="http://visdat.njtierney.com" class="uri">http://visdat.njtierney.com</a>)</li>
 </ul></li>
 </ul>
 <p>(A number of packages are from <a href="https://ropensci.org/" class="uri">https://ropensci.org/</a>. You may want to check there for new ones.)</p>
+<ul>
+<li>misc
+<ul>
+<li><a href="https://github.com/QualitativeDataRepository/archivr"><code>archivr</code></a> Automated preservation of urls in Web Archives (<a href="https://qdr.syr.edu/qdr-blog/archivr-loving-data-web-research">More</a>)</li>
+</ul></li>
+</ul>
 </div>
 
 
@@ -415,6 +525,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
