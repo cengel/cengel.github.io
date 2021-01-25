@@ -25,6 +25,17 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -297,7 +308,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Accessing Social Science Data with R</h1>
 <h4 class="author">Online at: bit.ly/sul-db-R</h4>
-<h4 class="date">Last updated: December 13, 2020 cengel @ stanford</h4>
+<h4 class="date">Last updated: January 25, 2021 cengel @ stanford</h4>
 
 </div>
 
@@ -473,7 +484,6 @@ $(document).ready(function () {
 <li><p><a href="https://cran.rstudio.com/web/packages/data.world/"><code>data.world</code></a>: High-level tools for working with <a href="https://data.world">data.world</a> data sets.</p></li>
 <li><p><a href="https://github.com/tklebel/jstor"><code>jstor</code></a>: Import journal data from DfR (JSTOR)</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=fulltext"><code>fulltext</code></a>: A single interface to full text sources ‘scholarly’ data, including ‘Biomed Central’, Public Library of Science, ‘Pubmed Central’, ‘eLife’, and more. <a href="https://books.ropensci.org/fulltext/">(Manual)</a></p></li>
-<li><p><a href="https://CRAN.R-project.org/package=qualtRics"><code>qualtRics</code></a>: Convenience functions to pull survey results straight into R using the Qualtrics API. (<strong>package archived 2018-02-05</strong>)</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=essurvey"><code>essurvey</code></a>: Download data from the <a href="http://www.europeansocialsurvey.org/">European Social Survey</a>.</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=RefManageR"><code>RefManageR</code></a>: Import and work with bibliographic references. Stores with <code>BibTeX</code> and <code>BibLaTeX</code> references, interfaces with <code>NCBI Entrez</code>, <code>CrossRef</code>, and <code>Zotero</code>, extracts references from locally stored PDF and generates bibliographies for <code>RMarkdown</code>.</p></li>
 <li><p><a href="https://cran.r-project.org/package=nomisr"><code>nomisr</code></a>: UK official statistics from the ‘Nomis’ database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the <a href="https://www.nomisweb.co.uk">Office for National Statistics</a>.</p></li>
@@ -483,6 +493,7 @@ $(document).ready(function () {
 <li><p><a href="https://CRAN.R-project.org/package=tidyquant"><code>tidyquant</code></a>: A wrapper to various ‘xts’, ‘zoo’, ‘quantmod’, ‘TTR’ and ‘PerformanceAnalytics’ package functions that returns the objects in the tidy ‘tibble’ format.</p></li>
 <li><p><a href="https://CRAN.R-project.org/package=rdhs"><code>rdhs</code></a>: Management and analysis of <a href="https://dhsprogram.com/data/available-datasets.cfm">Demographic and Health Survey (DHS)</a> data.</p></li>
 <li><p><a href="https://github.com/embruna/refnet"><code>refnet</code></a>: Read, organize, geocode, analyze, and visualize Clarivate Web of Knowledge/Web of Science, format reference data files for scientometric, social network, and Science of Science analyses. Not on CRAN.</p></li>
+<li><p><a href="https://cran.r-project.org/package=suppdata"><code>suppdata</code></a>: Downloading Supplementary Data from Published Manuscripts</p></li>
 <li><p>geospatial data:</p>
 <ul>
 <li><a href="https://CRAN.R-project.org/package=bikedata"><code>bikedata</code></a> data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia.</li>
@@ -517,7 +528,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

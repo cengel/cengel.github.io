@@ -141,7 +141,6 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`data.world`](https://cran.rstudio.com/web/packages/data.world/):  High-level tools for working with [data.world](https://data.world) data sets.
 - [`jstor`](https://github.com/tklebel/jstor): Import journal data from DfR (JSTOR)
 - [`fulltext`](https://CRAN.R-project.org/package=fulltext): A single interface to full text sources 'scholarly' data, including 'Biomed Central', Public Library of Science, 'Pubmed Central', 'eLife', and more. [(Manual)](https://books.ropensci.org/fulltext/)
-- [`qualtRics`](https://CRAN.R-project.org/package=qualtRics): Convenience functions to pull survey results straight into R using the Qualtrics API. (**package archived 2018-02-05**)
 - [`essurvey`](https://CRAN.R-project.org/package=essurvey): Download data from the [European Social Survey](http://www.europeansocialsurvey.org/).
 - [`RefManageR`](https://CRAN.R-project.org/package=RefManageR): Import and work with bibliographic references. Stores with `BibTeX` and `BibLaTeX` references, interfaces with `NCBI Entrez`, `CrossRef`, and `Zotero`, extracts references from locally stored PDF and generates bibliographies for `RMarkdown`.
 - [`nomisr`](https://cran.r-project.org/package=nomisr): UK official statistics from the 'Nomis' database.Includes Census, Labour Force Survey, DWP benefit statistics and other economic and demographic data from the [Office for National Statistics](https://www.nomisweb.co.uk).
@@ -151,6 +150,7 @@ The Stanford Libraries (SL) offer a number of datasets for social science resear
 - [`tidyquant`](https://CRAN.R-project.org/package=tidyquant):  A wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions that returns the objects in the tidy 'tibble' format.
 - [`rdhs`](https://CRAN.R-project.org/package=rdhs): Management and analysis of [Demographic and Health Survey (DHS)](https://dhsprogram.com/data/available-datasets.cfm) data.
 - [`refnet`](https://github.com/embruna/refnet): Read, organize, geocode, analyze, and visualize Clarivate Web of Knowledge/Web of Science, format reference data files for scientometric, social network, and Science of Science analyses. Not on CRAN.
+- [`suppdata`](https://cran.r-project.org/package=suppdata): Downloading Supplementary Data from Published Manuscripts
 
 - geospatial data:
     - [`bikedata`](https://CRAN.R-project.org/package=bikedata) data from public hire bicycle systems,including London, New York, Chicago, Washington DC, Boston, Los Angeles, and Philadelphia. 
